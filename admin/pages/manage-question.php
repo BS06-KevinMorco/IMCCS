@@ -201,8 +201,8 @@
        <br> <br> <br>
        <div class="actions">
        <button type="button" class="btn btn-cancel swal2-styled swal2-cancel" >Cancel</button>
-      <button type="button" class="btn btn-yes edit-primary-button swal2-styled swal2-confirm">Assessment</button>
-      <button type="button" class="btn btn-no edit-primary-button swal2-styled swal2-confirm">Retake</button></div>`,
+      <button type="button" class="btn btn-yes edit-primary-button swal2-styled swal2-confirm">Pre Assessment</button>
+      <button type="button" class="btn btn-no edit-primary-button swal2-styled swal2-confirm">Post Assessment</button></div>`,
                 showCancelButton: false,
                 confirmButtonText: 'Yes, proceed',
                 reverseButtons: true,
