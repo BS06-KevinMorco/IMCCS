@@ -114,6 +114,10 @@ try {
         $codeQuery = $conn->query("UPDATE user_tbl  set  token='$token' WHERE email = '$email'");
 
         $mail->send();
+        echo "Account";
+
+    } else{
+        echo "No Account";
 
     }
     $conn->close();

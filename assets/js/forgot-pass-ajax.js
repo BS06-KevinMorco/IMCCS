@@ -60,38 +60,25 @@ $('#forgot-pass').submit(function (event) {
                 email: email
 
             },
-            beforeSend: function () {
-                Swal.fire({
-                    title: 'Please wait for a second...',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    onBeforeOpen: () => {
-                        Swal.showLoading()
-                    },
-                });
-            },
-            complete: function () {
-                Swal.fire({
-                    title: 'Password reset link sent!',
-                    text: "Please check your email",
-                    icon: 'success',
-                    confirmButtonColor: '#800000',
-                    confirmButtonText: 'OK'
-                })
-            },
             success: function (data) {
-                if (data) {
+                var datas = data;
+                trimData = datas.trim();
+
+                console.log(trimData)
+
+                if (trimData === "No Account") {
+                    Swal.fire({
+                        title: 'Account does not exist!',
+                        text: "Please put your existing account",
+                        icon: 'error',
+                        confirmButtonColor: '#800000',
+                        confirmButtonText: 'OK'
+                    })
+                } else if (trimData === "Account") {
                     Swal.fire({
                         title: 'Password reset link sent!',
                         text: "Please check your email",
                         icon: 'success',
-                        confirmButtonColor: '#800000',
-                        confirmButtonText: 'OK'
-                    })
-                } else {
-                    Swal.fire({
-                        title: 'Something Went Wrong!',
-                        icon: 'error',
                         confirmButtonColor: '#800000',
                         confirmButtonText: 'OK'
                     })
