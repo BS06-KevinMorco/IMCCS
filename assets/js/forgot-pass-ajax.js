@@ -93,7 +93,7 @@ $('#forgot-pass').submit(function (event) {
                         confirmButtonText: 'OK'
                     })
                 }
-                else if (trimData === "Error") {
+                else  {
                     Swal.fire({
                         title: 'Cannot Send Email Right Now!',
                         text: "There is a problem in the server, you can check again later.",
