@@ -2,7 +2,7 @@ function forgotPassEmailRegex() {
     // get value of input email
     var email = $("#forgot-email").val();
     // use reular expression
-    var reg = new RegExp("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@(gmail|yahoo|hotmail)+\.(com|org)$");
+    var reg = new RegExp("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@(gmail|yahoo|hotmail|lspu)+\\.(com|org|edu)(\\.ph)?$");
     if (reg.test(email)) {
         return true;
     } else {
