@@ -7,13 +7,13 @@ $countSummaryAssessment = $mysqli->prepare("SELECT count_takers.status, IF(choic
 
 LEFT JOIN ( SELECT COUNT(*) as total_right, answer.question_id,assessment_question,question_answer,assessment_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer ON question.question_id = answer.question_id INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id  WHERE BINARY assessment_answer.assessment_answer = BINARY answer.question_answer GROUP BY answer.question_id ) as count_right ON count_takers.question_id = count_right.question_id
 
-LEFT JOIN ( SELECT COUNT(DISTINCT answer.code) as total_choice_1,answer.question_id,question.assessment_question,question.assessment_choice1,question.assessment_choice2,question.assessment_choice3,question.assessment_choice4, question_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer INNER JOIN retake_chosen_tbl assessment INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id WHERE question.assessment_choice1 = answer.question_answer AND assessment.code = answer.code AND assessment.assessment_id =?  AND answer.assessment_id =?  GROUP BY answer.question_answer, answer.question_id ) as choice1 ON count_takers.question_id = choice1.question_id
+LEFT JOIN ( SELECT COUNT(DISTINCT answer.code) as total_choice_1,answer.question_id,question.assessment_question,question.assessment_choice1,question.assessment_choice2,question.assessment_choice3,question.assessment_choice4, question_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer ON question.assessment_id = answer.assessment_id INNER JOIN retake_chosen_tbl assessment ON question.assessment_id = assessment.assessment_id INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id WHERE question.assessment_choice1 = answer.question_answer AND assessment.code = answer.code AND assessment.assessment_id =?  AND answer.assessment_id =?  GROUP BY answer.question_answer, answer.question_id ) as choice1 ON count_takers.question_id = choice1.question_id
 
- LEFT JOIN ( SELECT COUNT(DISTINCT answer.code) as total_choice_2,answer.question_id,question.assessment_question,question.assessment_choice1,question.assessment_choice2,question.assessment_choice3,question.assessment_choice4, question_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer INNER JOIN retake_chosen_tbl assessment INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id WHERE question.assessment_choice2 = answer.question_answer AND assessment.code = answer.code AND assessment.assessment_id =?  AND answer.assessment_id =?  GROUP BY answer.question_answer, answer.question_id ) as choice2 ON count_takers.question_id = choice2.question_id
+ LEFT JOIN ( SELECT COUNT(DISTINCT answer.code) as total_choice_2,answer.question_id,question.assessment_question,question.assessment_choice1,question.assessment_choice2,question.assessment_choice3,question.assessment_choice4, question_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer ON question.assessment_id = answer.assessment_id INNER JOIN retake_chosen_tbl assessment ON question.assessment_id = assessment.assessment_id INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id WHERE question.assessment_choice2 = answer.question_answer AND assessment.code = answer.code AND assessment.assessment_id =?  AND answer.assessment_id =?  GROUP BY answer.question_answer, answer.question_id ) as choice2 ON count_takers.question_id = choice2.question_id
 
- LEFT JOIN ( SELECT COUNT(DISTINCT answer.code) as total_choice_3,answer.question_id,question.assessment_question,question.assessment_choice1,question.assessment_choice2,question.assessment_choice3,question.assessment_choice4, question_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer INNER JOIN retake_chosen_tbl assessment INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id WHERE question.assessment_choice3 = answer.question_answer AND assessment.code = answer.code AND assessment.assessment_id =?  AND answer.assessment_id =?  GROUP BY answer.question_answer, answer.question_id ) as choice3 ON count_takers.question_id = choice3.question_id
+ LEFT JOIN ( SELECT COUNT(DISTINCT answer.code) as total_choice_3,answer.question_id,question.assessment_question,question.assessment_choice1,question.assessment_choice2,question.assessment_choice3,question.assessment_choice4, question_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer ON question.assessment_id = answer.assessment_id INNER JOIN retake_chosen_tbl assessment ON question.assessment_id = assessment.assessment_id INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id WHERE question.assessment_choice3 = answer.question_answer AND assessment.code = answer.code AND assessment.assessment_id =?  AND answer.assessment_id =?  GROUP BY answer.question_answer, answer.question_id ) as choice3 ON count_takers.question_id = choice3.question_id
 
- LEFT JOIN ( SELECT COUNT(DISTINCT answer.code) as total_choice_4,answer.question_id,question.assessment_question,question.assessment_choice1,question.assessment_choice2,question.assessment_choice3,question.assessment_choice4, question_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer INNER JOIN retake_chosen_tbl assessment INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id WHERE question.assessment_choice4 = answer.question_answer AND assessment.code = answer.code AND assessment.assessment_id =?  AND answer.assessment_id =?  GROUP BY answer.question_answer, answer.question_id ) as choice4 ON count_takers.question_id = choice4.question_id
+ LEFT JOIN ( SELECT COUNT(DISTINCT answer.code) as total_choice_4,answer.question_id,question.assessment_question,question.assessment_choice1,question.assessment_choice2,question.assessment_choice3,question.assessment_choice4, question_answer FROM assessment_question_tbl question INNER JOIN retake_answer_tbl answer ON question.assessment_id = answer.assessment_id INNER JOIN retake_chosen_tbl assessment ON question.assessment_id = assessment.assessment_id INNER JOIN assessment_answer_tbl assessment_answer ON assessment_answer.question_id = question.question_id WHERE question.assessment_choice4 = answer.question_answer AND assessment.code = answer.code AND assessment.assessment_id =?  AND answer.assessment_id =?  GROUP BY answer.question_answer, answer.question_id ) as choice4 ON count_takers.question_id = choice4.question_id
 
  LEFT JOIN (
   SELECT COUNT(DISTINCT answer.code) as total_true, answer.question_id
@@ -461,10 +461,8 @@ $rowcount = mysqli_num_rows($checkAssessmentChosen);
                                 var xValues = ["<?php echo $returnChoiceRow["assessment_choice1"] ?>", "<?php echo $returnChoiceRow["assessment_choice2"] ?>", "<?php echo $returnChoiceRow["assessment_choice3"] ?>", "<?php echo $returnChoiceRow["assessment_choice4"] ?>"];
                                 var yValues = ["<?php echo $returnChoiceRow["total_choice_1"] ?>", "<?php echo $returnChoiceRow["total_choice_2"] ?>", "<?php echo $returnChoiceRow["total_choice_3"] ?>", "<?php echo $returnChoiceRow["total_choice_4"] ?>"];
                                 var barColors = [
-                                    "#b91d47",
-                                    "#00aba9",
-                                    "#2b5797",
-                                    "#e8c3b9"
+                                    "#990099", "#109618", "#FF9900", "#DC3912"
+
                                 ];
 
                                 new Chart("piechart_question<?php echo $returnChoiceRow['question_id'] ?>", {
@@ -548,8 +546,8 @@ $rowcount = mysqli_num_rows($checkAssessmentChosen);
                                 var xValues = ["True", "False"];
                                 var yValues = ["<?php echo $returnChoiceRow["total_true"] ?>", "<?php echo $returnChoiceRow["total_false"] ?>"];
                                 var barColors = [
-                                    "#b91d47",
-                                    "#00aba9",
+                                    "#8A008A",
+                                    "#00990A",
                                     "#2b5797",
                                     "#e8c3b9"
                                 ];
@@ -748,4 +746,17 @@ $rowcount = mysqli_num_rows($checkAssessmentChosen);
             chart.draw(data, options);
 
         }
+    </script>
+
+<script>
+        $(document).ready(function() {
+            $('.right-answer').each(function() {
+                if ($(this).text() == 'True') {
+                    $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#8A008A');
+                } else if ($(this).text() == 'False') {
+                    $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#00990A');
+
+                }
+            });
+        });
     </script>

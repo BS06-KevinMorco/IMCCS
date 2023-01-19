@@ -177,22 +177,10 @@ if ($rowcount > 0) {
                             })
 
                         } else if (data == 'Retake') {
-                            Swal.fire({
-                                title: 'This post assessment is available!',
-                                text: "Do you want to take the assessment?",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                reverseButtons: true,
-                                confirmButtonColor: '#800000',
-                                confirmButtonText: 'OK'
-                            }).then((result) => {
-                                if (result) {
-                                    window.location = 'home-student.php?page=user-retake-assessment&assessment_id=' + assessment_id;
 
-                                } else {
-                                    Swal.close();
-                                }
-                            })
+                            window.location = 'home-student.php?page=user-retake-assessment&assessment_id=' + assessment_id;
+
+
                         } else {
                             window.location = 'home-student.php?page=user-progress-assessment&assessment_id=' + assessment_id;
 

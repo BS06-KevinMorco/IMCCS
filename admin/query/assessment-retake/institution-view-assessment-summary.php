@@ -563,3 +563,16 @@ if ($returnSummaryAssessmentRow->num_rows != 0) { ?>
         }, speed);
     })
 </script>
+
+<script>
+        $(document).ready(function() {
+            $('.right-answer').each(function() {
+                if ($(this).text() == 'True') {
+                    $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#8A008A');
+                } else if ($(this).text() == 'False') {
+                    $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#00990A');
+
+                }
+            });
+        });
+    </script>

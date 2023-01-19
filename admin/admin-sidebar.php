@@ -116,7 +116,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href="home-admin.php?page=manage-assessment">
-                <i class="fa-solid fa-file-lines"></i>
+            <i class="fa-solid fa-square-poll-vertical"></i>
                 <span>Manage Result</span>
             </a>
         </li><!-- End Course Nav -->
@@ -126,14 +126,14 @@
         <li class="nav-heading">Pages</li>
         <li class="nav-item">
             <a class="nav-link" href="home-admin.php?page=manage-faq">
-                <i class="fa-solid fa-file-lines"></i>
+            <i class="fa-solid fa-circle-question"></i>
                 <span>Manage FAQ's</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="home-admin.php?page=manage-feedback">
-                <i class="fa-solid fa-file-lines"></i>
+            <i class="fa-solid fa-comments"></i>
                 <span>Manage Feedback</span>
             </a>
         </li>

@@ -308,7 +308,7 @@ $rowcount = $checkAssessmentChosen->num_rows;
                                                 <span class="right-answer"><?php echo $returnChoiceRow['assessment_choice4']; ?></span>
                                             <?php } ?>
                                         </div>
-                                        <?php } else if ($returnChoiceRow['type'] == 'Identification Question') { ?>
+                                    <?php } else if ($returnChoiceRow['type'] == 'Identification Question') { ?>
                                         <h4><?php echo $returnChoiceRow['assessment_question']; ?></h4>
                                         <p><b><?php echo $ans ?>%</b> of the respondents ( <b><?php echo $returnChoiceRow['total_right']; ?> of <?php echo $returnAssessmentTaker ?> </b>) answered this question correctly.</p>
                                         <?php
@@ -642,4 +642,17 @@ $rowcount = $checkAssessmentChosen->num_rows;
             chart.draw(data, options);
 
         }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.right-answer').each(function() {
+                if ($(this).text() == 'True') {
+                    $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#8A008A');
+                } else if ($(this).text() == 'False') {
+                    $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#00990A');
+
+                }
+            });
+        });
     </script>
