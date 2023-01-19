@@ -60,6 +60,16 @@ $('#forgot-pass').submit(function (event) {
                 email: email
 
             },
+            beforeSend: function () {
+                Swal.fire({
+                    title: 'Please wait for a second...',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
+            },
             success: function (data) {
                 var datas = data;
                 trimData = datas.trim();
