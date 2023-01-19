@@ -60,6 +60,16 @@ $('#forgot-pass').submit(function (event) {
                 email: email
 
             },
+            beforeSend: function () {
+                Swal.fire({
+                    title: 'Please wait for a second...',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
+            },
             success: function (data) {
                 var datas = data;
                 trimData = datas.trim();
@@ -86,6 +96,15 @@ $('#forgot-pass').submit(function (event) {
                     Swal.fire({
                         title: 'Cannot proceed to your request!',
                         text: "Email Server is down!, you can check again later!",
+                        icon: 'error',
+                        confirmButtonColor: '#800000',
+                        confirmButtonText: 'OK'
+                    })
+                }
+                else  {
+                    Swal.fire({
+                        title: 'Cannot Send Email Right Now!',
+                        text: "There is a problem in the server, you can check again later.",
                         icon: 'error',
                         confirmButtonColor: '#800000',
                         confirmButtonText: 'OK'
