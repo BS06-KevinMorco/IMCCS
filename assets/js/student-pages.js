@@ -43,7 +43,7 @@ function validateEmail() {
 
     // use reular expression
   //  var reg = new RegExp("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@(gmail|yahoo|hotmail)+\.(com|org)$");
-    var reg = new RegExp("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@(gmail|yahoo|hotmail|lspu)+\\.(com|org|edu)(\\.ph)?$");
+    var reg = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])+(?:\.[a-zA-Z]{2,})+$");
 
     if (reg.test(email) || reg.test(updateEmail)) {
         return true;
@@ -1326,6 +1326,17 @@ $('#assessment-exam').submit(function (event) {
                             }).then(function () {
                                 window.location = 'home-student.php?page=result&assessment_id=' + assessment_id;
                             })
+                        } else{
+                            Swal.fire({
+                                title: 'Quiz Assessment is Finished',
+                                html: "Click <b>OK</b> to check the result.",
+                                icon: 'success',
+                                confirmButtonColor: '#800000',
+                                confirmButtonText: 'OK'
+                            }).then(function () {
+                                window.location = 'home-student.php?page=result&assessment_id=' + assessment_id;
+                            })
+
                         }
                     },
                     error: function (xhr, status, error, data) {
@@ -1528,6 +1539,18 @@ $('#retake-assessment-exam').submit(function (event) {
                             }).then(function () {
                                 window.location = 'home-student.php?page=retake-result&assessment_id=' + assessment_id + 't&code=' + code;
                             })
+                        }
+                        else{
+                            Swal.fire({
+                                title: 'Quiz Assessment is Finished',
+                                html: "Click <b>OK</b> to check the result.",
+                                icon: 'success',
+                                confirmButtonColor: '#800000',
+                                confirmButtonText: 'OK'
+                            }).then(function () {
+                                window.location = 'home-student.php?page=result&assessment_id=' + assessment_id;
+                            })
+
                         }
                     },
                     error: function (xhr, status, error, data) {
