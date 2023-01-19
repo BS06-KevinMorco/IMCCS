@@ -27,13 +27,12 @@ curl_exec($curl);
 curl_close($curl);
 
 if ($date != NULL) {
-    $returnDateSubmit = date("Y-m-d H:i:s",strtotime($date));
-
+    $returnDateSubmit = date("Y-m-d H:i:s", strtotime($date));
 }
 
 
 
-$query = " SELECT * FROM assessment_tbl assessment WHERE NOT EXISTS (SELECT 1 FROM assessment_chosen chosen WHERE assessment.assessment_id = chosen.assessment_id AND chosen.user_id = '" .$_SESSION['user_id']."')";
+$query = " SELECT * FROM assessment_tbl assessment WHERE NOT EXISTS (SELECT 1 FROM assessment_chosen chosen WHERE assessment.assessment_id = chosen.assessment_id AND chosen.user_id = '" . $_SESSION['user_id'] . "')";
 
 
 
@@ -90,9 +89,9 @@ if ($rowcount > 0) {
                             <input type="hidden" name="assessment-id" id="assessment-id" value="<?php echo $row['assessment_id'] ?>">
                             <input type="hidden" name="date-deadline" id="date-deadline" value="<?php echo $returnDateDeadline ?>">
                             <input type="hidden" name="date-submit" id="date-submit" value="<?php echo $returnDateSubmit ?>">
-                            <input type="hidden" name= "user-email" id="user-email" value="<?php echo $_SESSION['email'] ?>">
+                            <input type="hidden" name="user-email" id="user-email" value="<?php echo $_SESSION['email'] ?>">
                             <div class="btn-topic-assessment-container">
-                            <input type="submit" class="ch-topic-assessment-btn" value="Take Assessment">
+                                <input type="submit" class="ch-topic-assessment-btn" value="Take Assessment">
                             </div>
                         </form>
                     </div>
@@ -179,9 +178,11 @@ if ($rowcount > 0) {
 
                         } else if (data == 'Retake') {
                             Swal.fire({
-                                title: 'This assessment is available for retake!',
+                                title: 'This post assessment is available!',
                                 text: "Do you want to take the assessment?",
                                 icon: 'warning',
+                                showCancelButton: true,
+                                reverseButtons: true,
                                 confirmButtonColor: '#800000',
                                 confirmButtonText: 'OK'
                             }).then((result) => {
@@ -207,4 +208,3 @@ if ($rowcount > 0) {
 
     });
 </script>
-
