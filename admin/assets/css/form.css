@@ -291,13 +291,13 @@ h3.question-number::before {
   color: red;
 }
 .btn-cancel{
-  font-size: 12px !important;
+  font-size: 15px !important;
 }
 .btn-yes{
-  font-size: 12px !important;
+  font-size: 15px !important;
 }
 .btn-no{
-  font-size: 12px !important;
+  font-size: 15px !important;
 }
 /* OVERRIDES BOOTSTRAP FOCUS COLOR */
 .form-control:focus,
