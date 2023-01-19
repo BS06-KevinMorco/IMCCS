@@ -173,9 +173,11 @@ if ($rowcount > 0) {
 
                         } else if (data == 'Retake') {
                             Swal.fire({
-                                title: 'This assessment is available for retake!',
+                                title: 'This post assessment is available!',
                                 text: "Do you want to take the assessment?",
                                 icon: 'warning',
+                                showCancelButton: true,
+                                reverseButtons: true,
                                 confirmButtonColor: '#800000',
                                 confirmButtonText: 'OK'
                             }).then((result) => {
