@@ -190,7 +190,7 @@ if ($rowcount > 0) {
                                     window.location = 'home-student.php?page=user-retake-assessment&assessment_id=' + assessment_id;
 
                                 } else {
-                                    // something other stuff
+                                    Swal.close();
                                 }
                             })
                         } else {
