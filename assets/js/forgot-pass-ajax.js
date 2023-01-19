@@ -82,6 +82,14 @@ $('#forgot-pass').submit(function (event) {
                         confirmButtonColor: '#800000',
                         confirmButtonText: 'OK'
                     })
+                } else {
+                    Swal.fire({
+                        title: 'Cannot proceed to your request!',
+                        text: "Email Server is down!, you can check again later!",
+                        icon: 'error',
+                        confirmButtonColor: '#800000',
+                        confirmButtonText: 'OK'
+                    })
                 }
 
             },

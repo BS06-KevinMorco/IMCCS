@@ -123,18 +123,23 @@ if (isset($_POST['user_id'])) {
 
 
     if ($date_deadline < $date_submit) {
-        echo json_encode(array("exceed"));
+      //  echo json_encode(array("exceed"));
+      echo 'exceed';
         $mysqli->rollback();
     } else {
         if ($rowcount == 1) {
             if ($insert1 && $insert3) {
-                echo json_encode(array("NotTaken"));
+            //    echo json_encode(array("NotTaken"));
+            echo 'NotTaken';
+
                 $mysqli->commit();
             }
         } else if ($rowcount > 0) {
             /* echo json_encode(array("Taken"));
             mysqli_query($mysqli, "ROLLBACK");*/
-            echo json_encode(array("NotTaken"));
+          //  echo json_encode(array("NotTaken"));
+          echo 'NotTaken';
+
             $mysqli->commit();
         }
     }
@@ -251,7 +256,9 @@ $conn = new mySqli('localhost', 'u351518056_capstone', 'H7xpO*D>9d', 'u351518056
     $conn->close();
 } catch (Exception $e) {
    // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-   echo json_encode(array("MailerError"));
+  // echo json_encode(array("MailerError"));
+  echo 'MailerError';
+
 }
 mysqli_close($mysqli);
 ?>

@@ -1283,7 +1283,7 @@ $('#assessment-exam').submit(function (event) {
                         email: email,
                         fname: fname
                     },
-                    dataType: 'json',
+                   // dataType: 'json',
                     beforeSend: function () {
                         Swal.fire({
                             title: 'Please wait for a second...',
@@ -1299,6 +1299,10 @@ $('#assessment-exam').submit(function (event) {
                     },
 
                     success: function (data) {
+                        var data = data;
+                        data = data.trim();
+
+                        console.log(data)
 
                         if (data == 'Taken') {
                             Swal.fire({
@@ -1495,7 +1499,7 @@ $('#retake-assessment-exam').submit(function (event) {
                         fname: fname
 
                     },
-                    dataType: 'json',
+                   // dataType: 'json',
                     beforeSend: function () {
                         Swal.fire({
                             title: 'Please wait for a second...',
@@ -1511,7 +1515,10 @@ $('#retake-assessment-exam').submit(function (event) {
                     },
 
                     success: function (data) {
+                        var data = data;
+                        data = data.trim();
 
+                        console.log(data)
                         if (data == 'Taken') {
                             Swal.fire({
                                 title: 'Quiz Already Taken',
@@ -1548,14 +1555,23 @@ $('#retake-assessment-exam').submit(function (event) {
                                 confirmButtonColor: '#800000',
                                 confirmButtonText: 'OK'
                             }).then(function () {
-                                window.location = 'home-student.php?page=result&assessment_id=' + assessment_id;
+                                window.location = 'home-student.php?page=retake-result&assessment_id=' + assessment_id + 't&code=' + code;
                             })
 
                         }
                     },
                     error: function (xhr, status, error, data) {
-
-
+                        /*
+                        Swal.fire({
+                            title: 'Quiz Assessment is Finished',
+                            html: "Click <b>OK</b> to check the result.",
+                            icon: 'success',
+                            confirmButtonColor: '#800000',
+                            confirmButtonText: 'OK'
+                        }).then(function () {
+                            window.location = 'home-student.php?page=retake-result&assessment_id=' + assessment_id;
+                        })
+*/
 
 
                     }

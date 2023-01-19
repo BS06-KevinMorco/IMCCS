@@ -867,9 +867,10 @@ $('#form-update-assessment-choice').submit(function (event) {
     }
     console.log($(".form-update-assessment-choice input"));
 
-    if ($(".form-update-assessment-choice input").hasClass('is-invalid') || $(".form-update-assessment-choice .tox-edit-area__iframe").hasClass('is-invalid') || $(".form-update-assessment-choice select").hasClass('is-invalid')) {
+    if ($(".form-update-assessment-choice input:visible").hasClass('is-invalid') || $(".form-update-assessment-choice .tox-edit-area__iframe").hasClass('is-invalid') || $(".form-update-assessment-choice select").hasClass('is-invalid')) {
         event.preventDefault();
         invalidInput();
+        console.log($(".form-update-assessment-choice input").hasClass('is-invalid'))
     } else {
         event.preventDefault();
         var question_id = $("#assessment-choice-question-id").val();
