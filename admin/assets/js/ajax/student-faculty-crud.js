@@ -16,7 +16,7 @@ function validateEmail(inputElement) {
     var email = inputElement.val();
 
     // use regular expression
-    var reg = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@(gmail|yahoo|hotmail|lspu|acts)+\.(com|org|edu(\.ph)?)$/;
+    var reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     return reg.test(email);
 }
 
