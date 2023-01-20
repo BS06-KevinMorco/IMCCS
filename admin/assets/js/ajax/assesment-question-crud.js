@@ -772,6 +772,7 @@ $(document).ready(function () {
                             $("#assessment-choice-update-ch2").val(row.assessment_choice2);
                             $("#assessment-choice-update-ch3").val(row.assessment_choice3);
                             $("#assessment-choice-update-ch4").val(row.assessment_choice4);
+                            $("#mcq-point").val(row.point);
                             $("#text-point-update").val(row.point);
                             $(".tf-text-point-update").val(row.point);
 
