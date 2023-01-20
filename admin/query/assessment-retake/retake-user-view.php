@@ -162,7 +162,7 @@ $countRetakes = $countSummaryAssessmentRows->num_rows;
                         <form id="view-retake-result-assessment" class="view-retake-result-assessment" method="GET">
                         <input type="hidden" name="assessment-id" id="assessment-id" value="<?php echo $returnChoiceRow['assessment_id'] ?>">
                                 <input type="hidden" name="retake-code" id="retake-code" value="<?php echo $returnChoiceRow['code'] ?>">
-                                <input type="hidden" name="user-id" id="user-id" value="<?php echo $returnChoiceRow['user_id'] ?>">
+                                <input type="hidden" name="user-id" id="user-id" value="<?php echo $user_id ?>">
                                 <input type="hidden" name="retake-fname" id="retake-fname" value="<?php echo $name ?>">
 
                             <div class="text-center">

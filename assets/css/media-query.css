@@ -67,6 +67,16 @@
 
 @media (min-width:0px) and (max-width:500px) {
 
+  .get-started .intro h2{
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .get-started .intro p{
+    font-size: 16px;
+  }
+
+
   .topic-assessment-container,
   .my-chosen-topic .topic-assessment-card,
   .my-chosen-assessment .topic-assessment-card {

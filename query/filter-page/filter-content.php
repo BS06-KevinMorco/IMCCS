@@ -36,7 +36,7 @@ while ($returnSubTopics = $subTopicResults->fetch_assoc()) {
             <div class="topic-btn-container text-center mt-4" data-module="<?php echo $row['module'] ?>" data-topic="<?php echo $row['title'] ?>" style="background-color: #fff; padding: 3rem 1rem 3rem 1rem">
                 <a class="btn btn-toggle btnPrevious">Back</a>
                 <a class="btn btn-toggle btnNext">Next</a>
-                <button class="btn btn-toggle btnFinish" data-topic="<?php echo $row['title'] ?>" data-subtopic="<?php echo $row['subtopic_id'] ?>" data-module="<?php echo $row['module'] ?>">Finish Topic</button>
+                <button class="btn btn-toggle btnFinish" data-id="<?php echo $row['lesson_id'] ?>" data-topic="<?php echo $row['title'] ?>" data-subtopic="<?php echo $row['subtopic_id'] ?>" data-module="<?php echo $row['module'] ?>">Finish Topic</button>
             </div>
         </div>
     <?php }  ?>

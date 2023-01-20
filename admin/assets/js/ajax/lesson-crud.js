@@ -422,7 +422,10 @@ $(document).ready(function () {
 
 jQuery(".add-subtopic").click(function () {
     var title = $(this).data('title');
+    var id = $(this).data('id');
+
     $('#subtopic-add-title').val(title)
+    $('#subtopic-add-id').val(id)
 
 
     $('#subtopic-add-modal').modal('show');
@@ -432,6 +435,7 @@ jQuery(".add-subtopic").click(function () {
         url: 'query/filter-subtopic.php',
         data: {
             title: title,
+            id: id,
         },
         success: function (data) {
 
@@ -450,6 +454,8 @@ jQuery(".add-subtopic").click(function () {
 
 $('#form-add-subtopic').submit(function (event) {
     var title = $("#subtopic-add-title").val();
+    var id = $("#subtopic-add-id").val();
+
     var bullet = $("#subtopic-add-bullet").val();
     var subTitle = $("#subtopic-add-sub").val();
     var content = tinymce.get("subtopic-add-content").getContent();
@@ -494,6 +500,7 @@ $('#form-add-subtopic').submit(function (event) {
             url: 'query/subtopic/subtopic-add-tbl.php',
             data: {
                 title: title,
+                lesson_id: id,
                 module: bullet,
                 subTitle: subTitle,
                 content: content

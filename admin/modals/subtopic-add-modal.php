@@ -7,6 +7,7 @@
             <div class="modal-body">
                 <form action="javascript:void(0)" class="form-add-subtopic" id="form-add-subtopic" name="form-add-subtopic" enctype="multipart/form-data" method="post" novalidate>
                     <input type="hidden" class="form-control" name="subtopic-add-title" id="subtopic-add-title" placeholder="Enter Topic Title" value="" required>
+                    <input type="hidden" class="form-control" name="subtopic-add-id" id="subtopic-add-id" placeholder="Enter Topic ID" value="" required>
 
                     <div class="container">
                         <div class="row mb-3">
