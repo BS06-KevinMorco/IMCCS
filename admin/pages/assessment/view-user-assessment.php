@@ -203,7 +203,7 @@ if ($rowcount > 0) {
         </nav>
 
         <div class="not-found">
-            <p> <img src="assets/img/icons/no-content.png" alt="" height="50%"> No Assessment Taken</p>
+            <p> <img src="assets/img/icons/no-data.png" alt="" height="50%"> No Assessment Taken</p>
         </div>
     <?php } ?>
 

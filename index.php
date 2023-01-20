@@ -29,7 +29,7 @@ include_once('query/login-registration-page/login-query.php');
     <?php
     include_once('modal/register-student.php');
     ?>
-<?php
+    <?php
     include_once('modal/register-institution.html');
     ?>
     <!-- PHP CODE USED FOR LOADING DYNAMICALLY PAGES WITHOUT RELOADING THE WHOLE ROUTE-->
@@ -84,6 +84,14 @@ include_once('query/login-registration-page/login-query.php');
             this.classList.toggle("fa-eye");
         });
     </SCript>
+
+    <script>
+        <?php @$page = $_GET['page']; ?>
+        <?php if ($page == "forgot-password") { ?>
+            $('.home-item').hide()
+
+        <?php } ?>
+    </script>
 
 
 </body>
