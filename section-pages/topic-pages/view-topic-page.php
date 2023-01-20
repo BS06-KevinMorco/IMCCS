@@ -571,6 +571,7 @@ $returnTopicQuery = $topicQuery->num_rows;
         var topic_title = $(this).data('topic')
         var module_title = $(this).data('module')
         var subtopic_id = $(this).data('subtopic')
+        var lesson_id = $(this).data('id')
 
         e.preventDefault();
         $.ajax({
@@ -580,7 +581,8 @@ $returnTopicQuery = $topicQuery->num_rows;
                 id: user_id,
                 title: topic_title,
                 module_title: module_title,
-                subtopic_id: subtopic_id
+                subtopic_id: subtopic_id,
+                lesson_id: lesson_id
             },
             success: function() {
                 Swal.fire({

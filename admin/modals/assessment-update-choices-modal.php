@@ -8,7 +8,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content modal-lg ">
             <div class="modal-header modal-lg ">
-                <h3 class="modal-title">Add Assessment Choices</h3>
+                <h3 class="modal-title">Update Assessment Choices</h3>
             </div>
             <div class="modal-body">
                 <form action="javascript:void(0)" class="form-update-assessment-choice" id="form-update-assessment-choice" name="form-update-assessment-choice" enctype="multipart/form-data" method="post" novalidate>
