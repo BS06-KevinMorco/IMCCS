@@ -333,8 +333,11 @@
     }
 
     .breadcrumb a {
-        color: #899bbd;
+        color: #000;
         transition: 0.3s;
+    }
+    .breadcrumb li.active a {
+        font-weight: bolder !important;
     }
 
     .breadcrumb a:hover {

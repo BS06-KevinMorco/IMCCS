@@ -2,7 +2,7 @@ function forgotPassEmailRegex() {
     // get value of input email
     var email = $("#forgot-email").val();
     // use reular expression
-    var reg = new RegExp("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@(gmail|yahoo|hotmail|lspu)+\\.(com|org|edu)(\\.ph)?$");
+    var reg = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])+(?:\.[a-zA-Z]{2,})+$");
     if (reg.test(email)) {
         return true;
     } else {
@@ -95,7 +95,7 @@ $('#forgot-pass').submit(function (event) {
                 } else {
                     Swal.fire({
                         title: 'Cannot proceed to your request!',
-                        text: "Email Server is down!, you can check again later!",
+                        text: "Email Server is down, you can check again later!",
                         icon: 'error',
                         confirmButtonColor: '#800000',
                         confirmButtonText: 'OK'

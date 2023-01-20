@@ -490,7 +490,13 @@ $(document).ready(function () {
                         }
                     },
                     error: function (xhr, status, error) {
-                        //console.error(xhr);
+                        Swal.fire({
+                            title: 'Registration Saved',
+                            text: "Email Server is down, you can check again later!",
+                            icon: 'warning',
+                            confirmButtonColor: '#800000',
+                            confirmButtonText: 'OK'
+                        })
 
 
                     }
@@ -876,7 +882,13 @@ $(document).ready(function () {
                     },
                     error: function (xhr, status, error) {
                         //console.error(xhr);
-
+                        Swal.fire({
+                            title: 'Registration Saved',
+                            text: "Email Server is down, you can check again later!",
+                            icon: 'warning',
+                            confirmButtonColor: '#800000',
+                            confirmButtonText: 'OK'
+                        })
 
                     }
 
@@ -1413,7 +1425,13 @@ $(document).ready(function () {
                     },
                     error: function (xhr, status, error) {
                         //console.error(xhr);
-
+                        Swal.fire({
+                            title: 'Registration Saved',
+                            text: "Email Server is down, you can check again later!",
+                            icon: 'warning',
+                            confirmButtonColor: '#800000',
+                            confirmButtonText: 'OK'
+                        })
 
                     }
 
