@@ -97,7 +97,7 @@ if ($rowcount > 0) {
     <?php }
 } else { ?>
     <div class="text-center mt-4">
-        <p class="chosen-empty"><img src="assets/images/icons/nap.png" width="50" height="50" alt=""> Looks like you haven't taken any pre assessments yet</p>
+        <p class="chosen-empty"><img src="assets/images/icons/search-gif.gif" width="50" height="50" alt=""> Looks like you haven't taken any pre assessments yet</p>
         <p class="chosen-suggestion mt-2">To browse post assessments you must take pre assessments first!</p>
     </div>
 <?php  } ?>

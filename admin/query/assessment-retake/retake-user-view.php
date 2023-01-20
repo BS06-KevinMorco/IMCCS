@@ -176,7 +176,7 @@ $countRetakes = $countSummaryAssessmentRows->num_rows;
     </div>
 <?php } else { ?>
     <div class="not-found">
-        <p> <img src="assets/img/icons/no-content.png" alt="" height="50%"> No Records Found</p>
+        <p> <img src="assets/img/icons/no-data.png" alt="" height="50%"> No Records Found</p>
     </div>
 <?php } ?>
 

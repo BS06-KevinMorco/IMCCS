@@ -358,6 +358,7 @@ svg>g>g.google-visualization-tooltip {
 
 .not-found img {
   height: 150px;
+  margin-top: -30px ;
 }
 
 /* VIEW ASSESSMENT SUMMARY END */

@@ -8,7 +8,7 @@
                         </h1>
                     </div>
                     <div class="hero-image wow fadeInUp" data-wow-delay=".25s">
-                        <img src="assets/images/hero/front-picture.png"  alt="hero-image" />
+                        <img src="assets/images/hero/imccs-front.png"  alt="hero-image" />
                         <img src="assets/images/hero/dotted-shape.svg" alt="shape" class="shape shape-1" />
                         <img src="assets/images/hero/dotted-shape.svg" alt="shape" class="shape shape-2" />
                     </div>

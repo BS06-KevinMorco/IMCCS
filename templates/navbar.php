@@ -94,7 +94,7 @@
                                  </li>
                              </ul>
                          <?php else : ?>
-                             <ul id="nav" class="navbar-nav mx-auto">
+                             <ul id="nav" class="navbar-nav mx-auto home-item">
 
                                  <li class="nav-item">
                                      <a class="ud-menu-scroll" href="#home">Home</a>

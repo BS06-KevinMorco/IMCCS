@@ -581,7 +581,7 @@ $rowcount = mysqli_num_rows($checkAssessmentChosen);
                             </ol>
                         </nav>
                         <div class="not-found">
-                            <p> <img src="assets/img/icons/no-content.png" alt="" height="50%"> No Records Found</p>
+                            <p> <img src="assets/img/icons/no-data.png" alt="" height="50%"> No Records Found</p>
                         </div>
                     </div>
                 <?php } ?>

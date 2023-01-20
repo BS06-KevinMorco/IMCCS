@@ -54,7 +54,7 @@ if ($rowcount > 0) {
     <?php }
 } else { ?>
     <div class="text-center mt-4">
-        <p class="chosen-empty"><img src="assets/images/icons/nap.png" width="50" height="50" alt="">No available topics yet</p>
+        <p class="chosen-empty"><img src="assets/images/icons/search-gif.gif" width="50" height="50" alt="">No available topics yet</p>
         <p class="chosen-suggestion mt-2">Please wait for more upcoming IMCCS topics!</p>
     </div>
 <?php  } ?>

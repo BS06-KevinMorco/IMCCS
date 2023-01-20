@@ -141,10 +141,10 @@ $mail = new PHPMailer(true);
 try {
     //Server settings
     $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+    $mail->Host       = 'smtp.hostinger.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'imccsonline@gmail.com';
-    $mail->Password   = 'chxjutlkrjrypcka';                            // SMTP password
+    $mail->Username   = 'imccs@imccs.online';
+    $mail->Password   = 'Kevinisback12345*';                            // SMTP password
     $mail->SMTPSecure = 'tls';
     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
     $mail->SMTPOptions = array(
@@ -154,7 +154,7 @@ try {
             'allow_self_signed' => true
         )
     );
-    $mail->setFrom('imccsonline@gmail.com', 'IMCCS');
+    $mail->setFrom('imccs@imccs.online', 'IMCCS');
     $mail->addAddress($email);
 
     $token = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
