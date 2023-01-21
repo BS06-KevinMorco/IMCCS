@@ -127,6 +127,8 @@ if (isset($_POST['user_id'])) {
 }
 mysqli_query($mysqli, "SET AUTOCOMMIT=1");
 
+/*
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -143,7 +145,7 @@ try {
     $mail->isSMTP();                                            // Send using SMTP
     $mail->Host       = 'smtp.hostinger.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'imccs@imccs.online';
+    $mail->Username   = 'imccs-support@imccs.online';
     $mail->Password   = 'Kevinisback12345*';                            // SMTP password
     $mail->SMTPSecure = 'tls';
     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
@@ -154,7 +156,7 @@ try {
             'allow_self_signed' => true
         )
     );
-    $mail->setFrom('imccs@imccs.online', 'IMCCS');
+    $mail->setFrom('imccs-support@imccs.online', 'IMCCS');
     $mail->addAddress($email);
 
     $token = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
@@ -243,3 +245,4 @@ $conn = new mySqli('localhost', 'u351518056_capstone', 'H7xpO*D>9d', 'u351518056
 }
 mysqli_close($mysqli);
 ?>
+*/
