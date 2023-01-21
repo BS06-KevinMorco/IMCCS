@@ -49,7 +49,7 @@
                     <div class="single-team wow fadeInUp" data-wow-delay=".15s">
                         <div class="team-developer-image-wrapper">
                             <div class="team-developer-image">
-                                <img src="assets/images/team/badillo.png" alt="team" />
+                                <img src="assets/images/team/darwin.png" alt="team" />
                             </div>
 
 

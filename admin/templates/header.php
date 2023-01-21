@@ -207,10 +207,6 @@
         }
     });
 
-    tinymce.init({
-        selector: '.form-view-subtopic textarea',
-        plugins: 'fullscreen'
-    })
 
     tinymce.init({
         selector: '.form-add-subtopic textarea',
@@ -586,6 +582,188 @@
             e.stopImmediatePropagation();
         }
     })
+
+
+
+    tinymce.init({
+        selector: '.form-view-subtopic textarea',
+        plugins: 'code print preview powerpaste casechange tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
+        width: "1200",
+        height: "800",
+        media_live_embeds: true,
+        keep_styles: false,
+        toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link image | code',
+        image_class_list: [{
+                title: 'No Class',
+                value: ''
+            },
+            {
+                title: 'Flip Image with text',
+                value: 'card-img-top'
+            },
+
+        ],
+        templates: [{
+
+                title: 'Page Header',
+                description: 'Add custom header',
+                url: 'assets/html-template/premade-template/header/header.html'
+            },
+
+            {
+                title: 'Aqua Template',
+                description: 'Premade Template with aqua theme',
+                url: 'assets/html-template/premade-template/template-theme/aqua-template.html'
+            },
+
+            {
+                title: 'Orange Template',
+                description: 'Premade Template with orange theme',
+                url: 'assets/html-template/premade-template/template-theme/orange-template.html'
+            },
+
+            {
+                title: 'Green Template',
+                description: 'Premade Template with green theme',
+                url: 'assets/html-template/premade-template/template-theme/green-template.html'
+            },
+
+            {
+                title: 'Introduction Template',
+                description: 'Template for introduction',
+                url: 'assets/html-template/premade-template/Introduction-template.html'
+            },
+
+            {
+                title: 'Table Content',
+                description: 'Add a div with table',
+                url: 'assets/html-template/premade-template/content/content-table.html'
+            },
+
+            {
+                title: 'Section Content',
+                description: 'Add a section',
+                url: 'assets/html-template/premade-template/content/content-section.html'
+            },
+
+            {
+                title: 'Pictures Container w/ Text',
+                description: 'Add a picture w/ text',
+                url: 'assets/html-template/premade-template/content/content-picture-wtext.html'
+            },
+
+            {
+                title: 'Pictures Container w/o Text',
+                description: 'Add a picture w/o text',
+                url: 'assets/html-template/premade-template/content/content-picture-wotext.html'
+            },
+
+            {
+                title: 'Pictures Section',
+                description: 'Add multiple pictures with rows',
+                url: 'assets/html-template/premade-template/content/content-section-picture.html'
+            },
+
+            {
+                title: 'Video Container',
+                description: 'Add a video',
+                url: 'assets/html-template/premade-template/content/content-video.html'
+            }
+        ],
+
+        /* enable title field in the Image dialog*/
+        image_title: true,
+        /* enable automatic uploads of images represented by blob or data URIs*/
+        automatic_uploads: true,
+        /*
+          URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+          images_upload_url: 'postAcceptor.php',
+          here we add custom filepicker only to Image dialog
+        */
+        file_picker_types: 'image',
+        /* and here's our custom image picker*/
+        file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+
+            /*
+              Note: In modern browsers input[type="file"] is functional without
+              even adding it to the DOM, but that might not be the case in some older
+              or quirky browsers like IE, so you might want to add it to the DOM
+              just in case, and visually hide it. And do not forget do remove it
+              once you do not need it anymore.
+            */
+
+            input.onchange = function() {
+                var file = this.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function() {
+                    /*
+                      Note: Now we need to register the blob in TinyMCEs image blob
+                      registry. In the next release this part hopefully won't be
+                      necessary, as we are looking to handle it internally.
+                    */
+                    var id = 'blobid' + (new Date()).getTime();
+                    var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                    var base64 = reader.result.split(',')[1];
+                    var blobInfo = blobCache.create(id, file, base64);
+                    blobCache.add(blobInfo);
+
+                    /* call the callback and populate the Title field with the file name */
+                    cb(blobInfo.blobUri(), {
+                        title: file.name
+                    });
+                };
+                reader.readAsDataURL(file);
+            };
+
+            input.click();
+        },
+        content_css: 'assets/css/tinymce-css.css, https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css',
+        content_style: 'img {width: 100%;}',
+
+        visualblocks_default_state: true,
+        end_container_on_empty_block: true,
+
+        setup: function(eds) {
+            eds.on('keyup', function(e) {
+                var input = $('.form-update-subtopic   tox-edit-area__iframe');
+                if ($(eds.getBody()).text().length == 0) {
+                    $('.form-update-subtopic   .tox-edit-area__iframe').addClass('is-invalid');
+                    $('.form-update-subtopic   .tox-edit-area__iframe').removeClass('is-valid');
+
+                } else {
+                    $('.form-update-subtopic   .tox-edit-area__iframe').addClass('is-valid');
+                    $('.form-update-subtopic   .tox-edit-area__iframe').removeClass('is-invalid');
+                    emptyField();
+
+                }
+                eds.on('change', function() {
+                    tinymce.triggerSave();
+                });
+            });
+
+            eds.on('change', function(e) {
+                var input = $('.form-update-subtopic   tox-edit-area__iframe');
+                if ($(eds.getBody()).text().length == 0) {
+                    $('.form-update-subtopic   .tox-edit-area__iframe').addClass('is-invalid');
+                    $('.form-update-subtopic   .tox-edit-area__iframe').removeClass('is-valid');
+
+                } else {
+                    $('.form-update-subtopic   .tox-edit-area__iframe').addClass('is-valid');
+                    $('.form-update-subtopic   .tox-edit-area__iframe').removeClass('is-invalid');
+                    emptyField();
+
+                }
+                eds.on('change', function() {
+                    tinymce.triggerSave();
+                });
+            });
+        }
+    });
+
 </script>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css">

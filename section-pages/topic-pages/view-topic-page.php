@@ -87,7 +87,7 @@ $returnTopicQuery = $topicQuery->num_rows;
                                     <br>
                                 <?php  } ?>
                                 <div class="topic-finish-container" data-title="<?php echo $itemss ?>">
-                                    <button class="btn btn-toggle btnFinishTopic mt-4" data-title="<?php echo $itemss ?>">Complete Topic</button>
+                                    <button class="btn btn-toggle btnFinishTopic animated pulse mt-4" data-title="<?php echo $itemss ?>">Complete Topic</button>
                                 </div>
                             </ul>
                         </div>
@@ -477,6 +477,7 @@ $returnTopicQuery = $topicQuery->num_rows;
         const nextTabLinkEl = $('.media-pages-container .nav-tabs .active').closest('li').next('li').find('a')[0];
         const nextTab = new bootstrap.Tab(nextTabLinkEl);
         nextTab.show();
+        $('#topic-content')[0].scrollTo(0,0);
 
     });
     $(document).on('click', '.btnPrevious', function() {
@@ -484,6 +485,7 @@ $returnTopicQuery = $topicQuery->num_rows;
         const prevTabLinkEl = $('.media-pages-container .nav-tabs .active').closest('li').prev('li').find('a')[0];
         const prevTab = new bootstrap.Tab(prevTabLinkEl);
         prevTab.show();
+        $('#topic-content')[0].scrollTo(0,0);
 
     });
 </script>
@@ -638,49 +640,45 @@ $returnTopicQuery = $topicQuery->num_rows;
     $(document).on('click', '.btnFinishTopic', function() {
         var user_id = $('#topic-user-id').val()
         var email = $('#topic-user-email').val()
-
         var topic_title = $(this).data('title')
         console.log(topic_title)
-        $.ajax({
-            type: "POST",
-            url: 'query/topic-page/complete-topic.php',
-            data: {
-                id: user_id,
-                title: topic_title,
-                email: email
-            },
-            success: function() {
-                Swal.fire({
-                    title: 'You have completed the ' + topic_title + ' topic',
-                    text: "Want to take test your knowledge? You can take our assessments to see if you truly understand the topic!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    reverseButtons: true,
-                    closeOnCancel: true,
-                    confirmButtonColor: '#800000',
-                    confirmButtonText: 'Yes, Continue',
+        Swal.fire({
+            title: 'Are you sure you want to complete the ' + topic_title + ' topic?',
+            text: "This action can't be undone",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#800000',
+            showCancelButton: true,
+            reverseButtons: true,
+            closeOnCancel: true,
+            confirmButtonText: 'Yes, I am sure',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: 'query/topic-page/complete-topic.php',
+                    data: {
+                        id: user_id,
+                        title: topic_title,
+                        email: email
+                    },
+                    success: function() {
 
+                        window.location.reload();
 
-                }).then((result) => {
-                    if (result.value) {
-                        window.location = 'home-student.php?page=user-progress-topic&title=' + title;
-
-                    } else {
-                        // something other stuff
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr);
+                        console.error(status);
+                        console.error(error);
                     }
-
-                })
-
-
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr);
-                console.error(status);
-                console.error(error);
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swal.close()
             }
-        });
+        })
     });
-
     <?php /*  $(document).ready(function() {
 
         <?php
@@ -767,6 +765,11 @@ $returnTopicQuery = $topicQuery->num_rows;
                 $('#exit-fullscreen').hide();
             }
         });
+
+    })
+
+    $(document).ready(function() {
+        $('.headers').addClass('animated pulse')
 
     })
 </script>

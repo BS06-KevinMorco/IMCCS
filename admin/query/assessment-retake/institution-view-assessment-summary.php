@@ -94,7 +94,7 @@ $returnOverallQuestion = $resultOverallQuestion->fetch_assoc();
 //END
 
 //SELECTS STATUS OF ASSESSMENT
-$statusQuery = $mysqli->prepare("SELECT status FROM assessment_tbl WHERE assessment_id = ?");
+$statusQuery = $mysqli->prepare("SELECT * FROM assessment_tbl WHERE assessment_id = ?");
 $statusQuery->bind_param('s', $assessment_id);
 $statusQuery->execute();
 $resultstatus = $statusQuery->get_result();
@@ -245,6 +245,11 @@ if ($returnSummaryAssessmentRow->num_rows != 0) { ?>
         <div class="statistics-item">
             <h1><?php echo $returnAssessmentTaker ?></h1>
             <h4>Assessment Takers</h4>
+        </div>
+
+        <div class="statistics-item">
+            <h1><?php echo $returnStatus['passing_rate'] ?>%</h1>
+            <h4>Passing Rate</h4>
         </div>
 
         <div class="statistics-item">
@@ -542,7 +547,7 @@ if ($returnSummaryAssessmentRow->num_rows != 0) { ?>
   #443E3E ${progressValue * 3.6}deg
 )`;
             } else {
-                <?php if ($institutionAssessmentRate >= 75) { ?>
+                <?php if ($institutionAssessmentRate >= $returnStatus['passing_rate']) { ?>
                     progressValue++;
                     valueContainer.textContent = `${progressValue}%`;
                     progressBar.style.background = `conic-gradient(
@@ -565,14 +570,14 @@ if ($returnSummaryAssessmentRow->num_rows != 0) { ?>
 </script>
 
 <script>
-        $(document).ready(function() {
-            $('.right-answer').each(function() {
-                if ($(this).text() == 'True') {
-                    $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#8A008A');
-                } else if ($(this).text() == 'False') {
-                    $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#00990A');
+    $(document).ready(function() {
+        $('.right-answer').each(function() {
+            if ($(this).text() == 'True') {
+                $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#8A008A');
+            } else if ($(this).text() == 'False') {
+                $(this).closest('.choice-container').find('.dot-indentifier').css('background-color', '#00990A');
 
-                }
-            });
+            }
         });
-    </script>
+    });
+</script>
