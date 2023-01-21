@@ -275,6 +275,8 @@ a.lock-topic {
   color: #fff;
   padding-bottom: 5rem;
   padding-top: 5rem;
+  animation: pulse 1s infinite;
+
 }
 
 .topic-header {
@@ -566,10 +568,13 @@ a.lock-topic {
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
+  animation: pulse 1s infinite;
 }
 
 .btnFinishTopic:hover {
   background-color: #30C730;
+  animation-play-state: paused;
+
 }
 
 .btn-toggle:hover {

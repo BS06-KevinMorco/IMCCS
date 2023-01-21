@@ -88,7 +88,7 @@ $returnOverallQuestion = $resultOverallQuestion->fetch_assoc();
 //END
 
 //SELECTS STATUS OF ASSESSMENT
-$statusQuery = $mysqli->prepare("SELECT status FROM assessment_tbl WHERE assessment_id = ?");
+$statusQuery = $mysqli->prepare("SELECT * FROM assessment_tbl WHERE assessment_id = ?");
 $statusQuery->bind_param('s', $assessment_id);
 $statusQuery->execute();
 $resultstatus = $statusQuery->get_result();
@@ -188,6 +188,11 @@ $rowcount = $checkAssessmentChosen->num_rows;
                         <div class="statistics-item">
                             <h1><?php echo $returnAssessmentTaker ?></h1>
                             <h4>Assessment Takers</h4>
+                        </div>
+
+                        <div class="statistics-item">
+                            <h1><?php echo $returnStatus['passing_rate'] ?>%</h1>
+                            <h4>Passing Rate</h4>
                         </div>
 
                         <div class="statistics-item">
@@ -511,7 +516,7 @@ $rowcount = $checkAssessmentChosen->num_rows;
   #443E3E ${progressValue * 3.6}deg
 )`;
                         } else {
-                            <?php if ($assessmentRate >= 75) { ?>
+                            <?php if ($assessmentRate >= $returnStatus['passing_rate']) { ?>
                                 progressValue++;
                                 valueContainer.textContent = `${progressValue}%`;
                                 progressBar.style.background = `conic-gradient(

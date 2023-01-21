@@ -22,6 +22,8 @@ if ($res) {
 }
 //}
 
+/*
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -132,3 +134,4 @@ $conn = new mySqli('localhost', 'u351518056_capstone', 'H7xpO*D>9d', 'u351518056
 }
 
 ?>
+*/

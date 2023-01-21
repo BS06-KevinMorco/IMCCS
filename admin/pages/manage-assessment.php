@@ -24,7 +24,7 @@
                             <a class="nav-link" data-bs-toggle="pill" aria-current="page" href="#passPost"><i class="fa-solid fa-user-check"></i>Passed Post Assessments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="pill" aria-current="page" href="#failPost"><i class="fa-solid fa-user-check"></i>Failed Post Assessments</a>
+                            <a class="nav-link" data-bs-toggle="pill" aria-current="page" href="#failPost"><i class="fa-solid fa-user-xmark"></i>Failed Post Assessments</a>
                         </li>
                     </ul>
 

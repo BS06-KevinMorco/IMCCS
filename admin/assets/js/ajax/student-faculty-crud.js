@@ -2204,7 +2204,7 @@ $(document).ready(function () {
                         $('.form-update-faculty .myContact').removeClass('is-valid');
                         $('.form-update-faculty .contact-feedback').removeClass('valid-feedback');
                         $('.form-update-faculty .contact-feedback').addClass('invalid-feedback');
-                    } else if (!validInteger($(".form-update-faculty #faculty-add-contact"))) {
+                    } else if (!validInteger($(".form-update-faculty #faculty-update-contact"))) {
                         $('.form-update-faculty .contact-feedback').html('<i class="fa-solid fa-triangle-exclamation"></i> Wrong format  only include numbers');
                         $('.form-update-faculty .contact-feedback').show();
                         $('.form-update-faculty .myContact').addClass('is-invalid');
@@ -2218,7 +2218,7 @@ $(document).ready(function () {
                         $('.form-update-faculty .myContact').removeClass('is-valid');
                         $('.form-update-faculty .contact-feedback').removeClass('valid-feedback');
                         $('.form-update-faculty .contact-feedback').addClass('invalid-feedback');
-                    } else if (!validatePhoneNumber($(".form-update-faculty #faculty-add-contact"))) {
+                    } else if (!validatePhoneNumber($(".form-update-faculty #faculty-update-contact"))) {
                         $('.form-update-faculty .contact-feedback').html('<i class="fa-solid fa-triangle-exclamation"></i> Wrong format must include <b> 09 </b> at the beginning of contact number');
                         $('.form-update-faculty .contact-feedback').show();
                         $('.form-update-faculty .myContact').addClass('is-invalid');

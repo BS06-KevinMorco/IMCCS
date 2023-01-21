@@ -80,4 +80,10 @@ while ($returnSubTopics = $subTopicResults->fetch_assoc()) {
         $(this).toggleClass('active');
     });
     });
+
+    $(document).ready(function() {
+        $('.headers').find('h1, h6').addClass('animated pulse');
+
+    })
+
 </script>
