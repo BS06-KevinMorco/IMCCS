@@ -58,6 +58,8 @@ $returnTopicQuery = $topicQuery->num_rows;
     </div>
 </section>
 
+
+
 <main id="main" class="main">
     <section class="main-section">
         <div class="main-content">
@@ -69,90 +71,98 @@ $returnTopicQuery = $topicQuery->num_rows;
                     <button class="btn btn-success" onclick="off()">Continue</button>
                 </div>
             </div>
+            <div class="loader-page">
+                <div id="preloader">
+                    <img src="assets/loader/Bean Eater-0.5s-200px.gif" alt="Loading...">
+                    <p>Loading Stuff...</p>
 
-            <?php if (!empty($returnTopicQuery)) { ?>
-                <div class="topic-home-container">
-                    <div class="column column-one d-flex">
-                        <div class="mySidebar pt-4" id="mySidebar">
-                            <ul class="topic-progress" id="topic-progress">
-                                <input type="hidden" id="topic-user-id" value="<?php echo $_SESSION['user_id'] ?>">
-                                <input type="hidden" id="topic-user-email" value="<?php echo $_SESSION['email'] ?>">
+                </div>
 
-                                <?php foreach ($rows as $row) {
-                                    $itemss =  $row['title'];
-                                ?>
-                                    <a class="topic-progress-item" data-id="<?php echo $row['subtopic_id'] ?>" data-module="<?php echo $row['module'] ?>" target="1" id="choice-<?php echo $row['subtopic_id'] ?>"><strong><?php echo $row['module']; ?></strong>
 
-                                    </a>
-                                    <br>
-                                <?php  } ?>
-                                <div class="topic-finish-container" data-title="<?php echo $itemss ?>">
-                                    <button class="btn btn-toggle btnFinishTopic animated pulse mt-4" data-title="<?php echo $itemss ?>">Complete Topic</button>
-                                </div>
-                            </ul>
-                        </div>
-                        <div class="toggle-topic-progress" id="toggle" onclick="toggleSidebar()">
-                            <i class="fa-solid fa-list"></i>
-                        </div>
-                    </div>
+                <?php if (!empty($returnTopicQuery)) { ?>
+                    <div class="topic-home-container">
+                        <div class="column column-one d-flex">
+                            <div class="mySidebar pt-4" id="mySidebar">
+                                <ul class="topic-progress" id="topic-progress">
+                                    <input type="hidden" id="topic-user-id" value="<?php echo $_SESSION['user_id'] ?>">
+                                    <input type="hidden" id="topic-user-email" value="<?php echo $_SESSION['email'] ?>">
 
-                    <div class="column column-two">
-                        <div class="topic-header">
-                            <div class="left-item">
-                                <h4><?php echo $title ?></h4>
+                                    <?php foreach ($rows as $row) {
+                                        $itemss =  $row['title'];
+                                    ?>
+                                        <a class="topic-progress-item" data-id="<?php echo $row['subtopic_id'] ?>" data-module="<?php echo $row['module'] ?>" target="1" id="choice-<?php echo $row['subtopic_id'] ?>"><strong><?php echo $row['module']; ?></strong>
+
+                                        </a>
+                                        <br>
+                                    <?php  } ?>
+                                    <div class="topic-finish-container" data-title="<?php echo $itemss ?>">
+                                        <button class="btn btn-toggle btnFinishTopic animated pulse mt-4" data-title="<?php echo $itemss ?>">Complete Topic</button>
+                                    </div>
+                                </ul>
                             </div>
-                            <div class="right-items">
-                                <div class="right-item back-home">
-                                    <h6><i class="fa-solid fa-house"></i> Home</h6>
-                                </div>
-                                <div class="right-item">
-                                    <h6 onclick="openFullscreen();"><i class=" fa-solid fa-expand"></i> View in Fullscreen</h6>
-                                </div>
+                            <div class="toggle-topic-progress" id="toggle" onclick="toggleSidebar()">
+                                <i class="fa-solid fa-list"></i>
                             </div>
                         </div>
-                        <div class="topic-content" id="topic-content">
-                            <div class="frontpage-container">
-                                <div class="topic-content-frontpage" id="topic-content-frontpage1">
-                                    <div class="row g-0">
-                                        <div class="col-lg-6 col-sm-12">
-                                            <img class="img-screen" src="assets/images/banner/iMCCS.png" alt="">
 
-                                            <div class="topic-home text-center px-4 pt-4">
-                                                <img src="assets/images/website-main-logo/IMCCS-black.png" width="400px" height="200px" alt="Logo" />
+                        <div class="column column-two">
+                            <div class="topic-header">
+                                <div class="left-item">
+                                    <h4><?php echo $title ?></h4>
+                                </div>
+                                <div class="right-items">
+                                    <div class="right-item back-home">
+                                        <h6><i class="fa-solid fa-house"></i> Home</h6>
+                                    </div>
+                                    <div class="right-item">
+                                        <h6 onclick="openFullscreen();"><i class=" fa-solid fa-expand"></i> View in Fullscreen</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="topic-content" id="topic-content">
+                                <div class="frontpage-container">
+                                    <div class="topic-content-frontpage" id="topic-content-frontpage1">
+                                        <div class="row g-0">
+                                            <div class="col-lg-6 col-sm-12">
+                                                <img class="img-screen" src="assets/images/banner/iMCCS.png" alt="">
 
-                                                <h2 class="module-heading pb-4">
+                                                <div class="topic-home text-center px-4 pt-4">
+                                                    <img src="assets/images/website-main-logo/IMCCS-black.png" width="400px" height="200px" alt="Logo" />
+
+                                                    <h2 class="module-heading pb-4">
 
 
-                                                </h2>
-                                                <div class="topic-home-list">
+                                                    </h2>
+                                                    <div class="topic-home-list">
 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12">
+                                                <div class="topic-home-picture h-100">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-sm-12">
-                                            <div class="topic-home-picture h-100">
-                                            </div>
-                                        </div>
                                     </div>
+
                                 </div>
+                                <div class="topic-pages">
 
+                                    <div class="subtopic-content-view"></div>
+
+
+
+                                </div>
+                                <a href="javascript:void(0)" onclick="closeFullscreen();" class="exit-fullscreen" id="exit-fullscreen" style="display: none;">
+                                    <i class="fa-solid fa-minimize"></i></a>
                             </div>
-                            <div class="topic-pages">
-
-                                <div class="subtopic-content-view"></div>
-
-
-
-                            </div>
-                            <a href="javascript:void(0)" onclick="closeFullscreen();" class="exit-fullscreen" id="exit-fullscreen" style="display: none;">
-                                <i class="fa-solid fa-minimize"></i></a>
                         </div>
                     </div>
-                </div>
-            <?php } else { ?>
-                <div class="alert alert-danger text-center">
-                    <i class="fa-solid fa-triangle-exclamation"></i> <strong>Seems like there are no available topics for viewing yet on <?php echo $title ?> .</strong> Please wait or you may check later, our administrators our working on it.
-                </div> <?php } ?>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger text-center">
+                <i class="fa-solid fa-triangle-exclamation"></i> <strong>Seems like there are no available topics for viewing yet on <?php echo $title ?> .</strong> Please wait or you may check later, our administrators our working on it.
+            </div> <?php } ?>
         </div>
     </section>
 </main>
@@ -477,7 +487,7 @@ $returnTopicQuery = $topicQuery->num_rows;
         const nextTabLinkEl = $('.media-pages-container .nav-tabs .active').closest('li').next('li').find('a')[0];
         const nextTab = new bootstrap.Tab(nextTabLinkEl);
         nextTab.show();
-        $('#topic-content')[0].scrollTo(0,0);
+        $('#topic-content')[0].scrollTo(0, 0);
 
     });
     $(document).on('click', '.btnPrevious', function() {
@@ -485,7 +495,7 @@ $returnTopicQuery = $topicQuery->num_rows;
         const prevTabLinkEl = $('.media-pages-container .nav-tabs .active').closest('li').prev('li').find('a')[0];
         const prevTab = new bootstrap.Tab(prevTabLinkEl);
         prevTab.show();
-        $('#topic-content')[0].scrollTo(0,0);
+        $('#topic-content')[0].scrollTo(0, 0);
 
     });
 </script>
@@ -772,4 +782,11 @@ $returnTopicQuery = $topicQuery->num_rows;
         $('.headers').addClass('animated pulse')
 
     })
+
+    $(document).ready(function() {
+        $('#preloader').fadeIn();
+        setTimeout(function() {
+            $('#preloader').fadeOut();
+        }, 1500);
+    });
 </script>
