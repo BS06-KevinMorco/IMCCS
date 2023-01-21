@@ -102,7 +102,7 @@ try {
     </tr>
 </table>';
 
-   $conn = new mySqli('localhost', 'root', '', 'u351518056_capstone');
+   $conn = new mySqli('localhost', 'u351518056_capstone', 'H7xpO*D>9d', 'u351518056_capstone');
 
     if ($conn->connect_error) {
         die('Could not connect to the database.');

@@ -1,8 +1,8 @@
 <?php
 	//make sure that the values for connecting the db is in order (servername, user, password, database name)
 	$servername = "localhost";
-	$username = "root";
-	$password = "";
+	$username = "u351518056_capstone";
+	$password = "H7xpO*D>9d";
 	$db_name = "u351518056_capstone";
 
 	//Connection to the MySQL DB
