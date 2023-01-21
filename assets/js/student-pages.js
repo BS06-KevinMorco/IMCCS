@@ -1323,7 +1323,7 @@ $('#assessment-exam').submit(function (event) {
                         } else if (data == 'NotTaken') {
                             Swal.fire({
                                 title: 'Quiz Assessment is Finished',
-                                html: "Click <b>OK</b> to check the result <br>You can also view the results in your email address. </br>",
+                                html: "Click <b>OK</b> to check the result!",
                                 icon: 'success',
                                 confirmButtonColor: '#800000',
                                 confirmButtonText: 'OK'
@@ -1539,7 +1539,7 @@ $('#retake-assessment-exam').submit(function (event) {
 
                             Swal.fire({
                                 title: 'Quiz Assessment is Finished!',
-                                html: "Click <b>OK</b> to check the result <br>You can also view the result on your email</br>",
+                                html: "Click <b>OK</b> to check the result!",
                                 icon: 'success',
                                 confirmButtonColor: '#800000',
                                 confirmButtonText: 'OK'
