@@ -40,7 +40,7 @@ if (empty($checkRowExist)) {
 ?>
 
 <?php
-$countSummaryAssessments = "SELECT * FROM retake_score_tbl as retake_score INNER JOIN retake_chosen_tbl as chosen ON retake_score.code = chosen.code INNER JOIN assessment_tbl as assessment INNER JOIN assessment_score as score ON score.assessment_id = retake_score.assessment_id WHERE chosen.user_id = ? and chosen.assessment_id = ? GROUP BY chosen.code ORDER BY chosen.user_id";
+$countSummaryAssessments = "SELECT * FROM retake_score_tbl as retake_score INNER JOIN retake_chosen_tbl as chosen ON retake_score.code = chosen.code INNER JOIN assessment_tbl as assessment ON assessment.assessment_id = retake_score.assessment_id  INNER JOIN assessment_score as score ON score.assessment_id = retake_score.assessment_id WHERE chosen.user_id = ? and chosen.assessment_id = ? GROUP BY chosen.code ORDER BY chosen.user_id";
 $stmt = $mysqli->prepare($countSummaryAssessments);
 $stmt->bind_param("is", $user_id, $selectedValue);
 $stmt->execute();
@@ -132,7 +132,7 @@ $countRetakes = $countSummaryAssessmentRows->num_rows;
                         <div class="invoice-date"><span title="Due Date" class="tag" style="float:right"><i class="fa-solid fa-calendar-days"></i> Submitted: <?php echo $returnDateSubmit  ?></span></br></div>
                     </div>
                     <div class="invoice-info">
-                        <div class="invoice-date"><span title="Percentage Comparison" class="tag"><i class="fa-solid fa-arrow-trend-down"></i> Pre Assessment Score: <?php echo $returnChoiceRow['assessment_score'] ?> / <?php echo $rowCountOver['point'] ?> </span></div>
+                        <div class="invoice-date"><span title="Percentage Comparison" class="tag"><i class="fa-solid fa-star"></i> Pre Assessment Score: <?php echo $returnChoiceRow['assessment_score'] ?> / <?php echo $rowCountOver['point'] ?> </span></div>
                         <div class="invoice-due-date"> <span title="Difficulty" class="tag"><i class="fa-solid fa-star"></i> Post Score: <?php echo $returnChoiceRow['retake_score'] ?> / <?php echo $rowCountOver['point'] ?></span>
                         </div>
                     </div>

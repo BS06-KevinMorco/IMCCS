@@ -151,7 +151,7 @@ $ans = number_format($rowCount / $returnCountOver['point'] * 100);
                         <div class="invoice-date"><span title="Due Date" class="tag" style="float:right"><i class="fa-solid fa-calendar-days"></i> Submitted: <?php echo $returnDateSubmit  ?></span></br></div>
                     </div>
                     <div class="invoice-info">
-                        <div class="invoice-date"><span title="Percentage Comparison" class="tag"><i class="fa-solid fa-arrow-trend-down"></i> Pre Assessment Score: <?php echo $row3['assessment_score'] ?> / <?php echo $returnCountOver['point'] ?> </span></div>
+                        <div class="invoice-date"><span title="Percentage Comparison" class="tag"><i class="fa-solid fa-star"></i> Pre Assessment Score: <?php echo $row3['assessment_score'] ?> / <?php echo $returnCountOver['point'] ?> </span></div>
                         <div class="invoice-due-date"> <span title="Difficulty" class="tag"><i class="fa-solid fa-star"></i> Post Score: <?php echo $row3['retake_score'] ?> / <?php echo $returnCountOver['point'] ?></span>
                         </div>
                     </div>

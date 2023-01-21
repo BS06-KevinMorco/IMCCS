@@ -27,8 +27,8 @@ $queryChosenAssessment->execute();
 $resultChosenAssessment = $queryChosenAssessment->get_result();
 $returnChosenAssessment = $resultChosenAssessment->fetch_assoc();
 
-$queryScore = $mysqli->prepare("SELECT *  FROM assessment_score WHERE assessment_id = ?");
-$queryScore->bind_param('i', $assessment_id);
+$queryScore = $mysqli->prepare("SELECT *  FROM assessment_score WHERE assessment_id = ? AND user_id = ?");
+$queryScore->bind_param('ii', $assessment_id,$user_id);
 $queryScore->execute();
 $resultScore = $queryScore->get_result();
 $returnScore = $resultScore->fetch_assoc();
