@@ -34,7 +34,7 @@
                             <div class="mb-3">
                                 <div class="text-input d-inline-flex align-items-center">
                                     <div class="inputContainer">
-                                        <input class="form-control user-update-input" type="text" id="student-oldpassword" placeholder=" " required>
+                                        <input class="form-control user-update-input" type="password" id="student-oldpassword" placeholder=" " required>
                                         <label for="student-oldpassword" class="label">Current Password</label>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                             <div class="mb-3">
                                 <div class="text-input d-inline-flex align-items-center">
                                     <div class="inputContainer">
-                                        <input class="form-control user-update-input" type="text" id="user-update-password" placeholder=" " required>
+                                        <input class="form-control user-update-input" type="password" id="user-update-password" placeholder=" " required>
                                         <label for="user-update-password" class="label">New Password</label>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                             <div class="mb-3">
                                 <div class="text-input d-inline-flex align-items-center">
                                     <div class="inputContainer">
-                                        <input class="form-control user-update-input" type="text" id="student-update-confirmpassword" placeholder=" " required>
+                                        <input class="form-control user-update-input" type="password" id="student-update-confirmpassword" placeholder=" " required>
                                         <label for="student-update-confirmpassword" class="label">Confirm Password</label>
                                     </div>
 
