@@ -65,7 +65,7 @@ function validRate(inputElement) {
     var reg = /^[0-9]+$/;
     return reg.test(rate);
 }
-
+/*
 function validRateLimit() {
     // return theNumber.match(/^\d+$/) && parseInt(theNumber) > 0;
 
@@ -75,6 +75,16 @@ function validRateLimit() {
     if (rate.match(regexLimit)) {
         return true;
     }
+}
+*/
+
+function validRateLimit(inputElement) {
+    // return theNumber.match(/^\d+$/) && parseInt(theNumber) > 0;
+
+    var rateLimit = inputElement.val();
+
+    var reg = /^[1-9][0-9]?$|^100$/;
+    return reg.test(rateLimit);
 }
 
 const Toast = Swal.mixin({
@@ -1152,7 +1162,7 @@ $(".form-add-assessment #assessment-add-rate").keyup(function () {
             $('.form-add-assessment .feedback-rate').html('<i class="fa-solid fa-triangle-exclamation"></i> Only numbers are allowed.');
             $(this).addClass('is-invalid');
             $(this).removeClass('is-valid');
-        } else if (!validRateLimit()) {
+        } else if (!validRateLimit($('#assessment-add-rate'))) {
             $('.form-add-assessment .feedback-rate').html('<i class="fa-solid fa-triangle-exclamation"></i> Only rates 1-100 is allowed.');
             $(this).addClass('is-invalid');
             $(this).removeClass('is-valid');
@@ -1250,7 +1260,7 @@ $(".form-update-assessment #assessment-update-rate").keyup(function () {
             $('.form-update-assessment .feedback-rate').html('<i class="fa-solid fa-triangle-exclamation"></i> Only numbers are allowed.');
             $(this).addClass('is-invalid');
             $(this).removeClass('is-valid');
-        } else if (!validRateLimit()) {
+        } else if (!validRateLimit($("#assessment-update-rate"))) {
             $('.form-update-assessment .feedback-rate').html('<i class="fa-solid fa-triangle-exclamation"></i> Only rates 1-100 is allowed.');
             $(this).addClass('is-invalid');
             $(this).removeClass('is-valid');
