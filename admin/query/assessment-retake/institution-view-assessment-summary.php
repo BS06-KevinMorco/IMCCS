@@ -106,7 +106,8 @@ if (empty($returnAssessmentTaker)) {
     $institutionAssessmentRate = number_format($returnOverallScore['total_score'] / 1 * 100);
 } else {
     $averageInstitutionScore = number_format($returnOverallScore['total_score'] / $returnAssessmentTaker);
-    $institutionAssessmentRate = number_format($returnOverallScore['total_score'] / $returnOverallQuestion['point']  * 100);
+    //$institutionAssessmentRate = number_format($returnOverallScore['total_score'] / $returnOverallQuestion['point']  * 100);
+    $institutionAssessmentRate = number_format($averageInstitutionScore / $returnOverallQuestion['point']  * 100);
 }
 
 
