@@ -494,7 +494,9 @@ $rowcount = mysqli_num_rows($checkAssessmentChosen);
                                 $resultQuestions = $mysqli->query($queryQuestions);
 
                                 // Initialize the chart colors array
-                                $chartColors = ["#990099", "#109618", "#FF9900", "#DC3912"];
+                              //  $chartColors = ["#990099", "#109618", "#FF9900", "#DC3912"];
+                              $randomColor = '#'.dechex(mt_rand(0x000000, 0xFFFFFF));
+                              $chartColors[] = $randomColor;
 
                                 // Loop through the questions
                                 while ($question = $resultQuestions->fetch_assoc()) {
@@ -608,7 +610,7 @@ $rowcount = mysqli_num_rows($checkAssessmentChosen);
   #443E3E ${progressValue * 3.6}deg
 )`;
                         } else {
-                            <?php if ($assessmentRate >= 75) { ?>
+                            <?php if ($assessmentRate >= $returnStatus['passing_rate']) { ?>
                                 progressValue++;
                                 valueContainer.textContent = `${progressValue}%`;
                                 progressBar.style.background = `conic-gradient(

@@ -442,7 +442,10 @@ if ($returnSummaryAssessmentRow->num_rows != 0) { ?>
                 $resultQuestions = $mysqli->query($queryQuestions);
 
                 // Initialize the chart colors array
-                $chartColors = ["#990099", "#109618", "#FF9900", "#DC3912"];
+                //$chartColors = ["#990099", "#109618", "#FF9900", "#DC3912"];
+
+                $randomColor = '#'.dechex(mt_rand(0x000000, 0xFFFFFF));
+                $chartColors[] = $randomColor;
 
                 // Loop through the questions
                 while ($question = $resultQuestions->fetch_assoc()) {
