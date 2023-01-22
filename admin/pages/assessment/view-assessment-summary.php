@@ -80,7 +80,8 @@ $returnOverallScore = $resultScore->fetch_assoc();
 //END
 
 //COUNTS THE TOTAL NUMBER OF QUESTIONS PER ASSESSMENT TAKEN BY ALL ASSESSMENT TAKERS
-$overallQuestionQuery = $mysqli->prepare("SELECT SUM(point) as point  FROM answer_tbl WHERE assessment_id = ?");
+//$overallQuestionQuery = $mysqli->prepare("SELECT SUM(point) as point  FROM answer_tbl WHERE assessment_id = ?");
+$overallQuestionQuery = $mysqli->prepare("SELECT SUM(point) as point  FROM assessment_question_tbl WHERE assessment_id = ?");
 $overallQuestionQuery->bind_param('s', $assessment_id);
 $overallQuestionQuery->execute();
 $resultOverallQuestion = $overallQuestionQuery->get_result();
@@ -99,8 +100,9 @@ if (empty($returnAssessmentTaker)) {
     $assessmentRate = number_format($returnOverallScore['total_score'] / 1);
     $averageScore = number_format($returnOverallScore['total_score'] / 1);
 } else {
-    $assessmentRate = number_format($returnOverallScore['total_score'] / $returnOverallQuestion['point'] * 100);
+   // $assessmentRate = number_format($returnOverallScore['total_score'] / $returnOverallQuestion['point'] * 100);
     $averageScore = number_format($returnOverallScore['total_score'] / $returnAssessmentTaker);
+    $assessmentRate = number_format($averageScore / $returnOverallQuestion['point'] * 100);
 }
 
 
