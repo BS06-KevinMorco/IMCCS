@@ -114,6 +114,7 @@
   padding: 20px;
   font-family: Arial, sans-serif;
   padding-bottom: 10px;
+  margin-bottom: 2rem;
 }
 
 .invoice-header {
@@ -271,6 +272,7 @@ h4 {
   background-color: #DC3912;
 }
 
+/*
 .identification-choice:nth-of-type(1) .dot-indentifier {
   background-color: #990099 !important;
 }
@@ -285,6 +287,11 @@ h4 {
 
 .identification-choice:nth-of-type(4) .dot-indentifier {
   background-color: #DC3912 !important;
+}
+
+*/
+.identification-choice .dot-indentifier {
+  background: linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%) !important;
 }
 
 svg>g>g.google-visualization-tooltip {

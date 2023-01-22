@@ -4,10 +4,10 @@ $result = mysqli_query($mysqli, $query);   ?>
 <?php $gender_query = "SELECT gender, count(*) as gender_number FROM student_faculty_profile_tbl GROUP BY gender";
 $gender_result = mysqli_query($mysqli, $gender_query);   ?>
 
-<?php $pass_query = "SELECT verdict, count(*) as pass_rate FROM assessment_score GROUP BY verdict";
+<?php $pass_query = "SELECT verdict, count(*) as pass_rate FROM assessment_score GROUP BY verdict ORDER BY verdict DESC";
 $pass_result = mysqli_query($mysqli, $pass_query);   ?>
 
-<?php $postpass_query = "SELECT verdict, count(*) as pass_rate FROM retake_score_tbl GROUP BY verdict";
+<?php $postpass_query = "SELECT verdict, count(*) as pass_rate FROM retake_score_tbl GROUP BY verdict ORDER BY verdict DESC";
 $postpass_result = mysqli_query($mysqli, $postpass_query);   ?>
 
 <?php
@@ -223,22 +223,22 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
             });
           <?php   } else { ?>
 
-          new Chart("piechart_user", {
-            type: "pie",
-            data: {
-              labels: <?php echo $returnChatLabels ?>,
-              datasets: [{
-                backgroundColor: barColors,
-                data: <?php echo $returnChatData ?>
-              }]
-            },
-            options: {
-              title: {
-                display: true,
-                text: "Percentage of Users"
+            new Chart("piechart_user", {
+              type: "pie",
+              data: {
+                labels: <?php echo $returnChatLabels ?>,
+                datasets: [{
+                  backgroundColor: barColors,
+                  data: <?php echo $returnChatData ?>
+                }]
+              },
+              options: {
+                title: {
+                  display: true,
+                  text: "Percentage of Users"
+                }
               }
-            }
-          });
+            });
           <?php   } ?>
         </script>
 
@@ -246,22 +246,27 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
           <?php
           $chartLabel = [];
           $chartData = [];
+          $barColors = [];
 
           while ($rows = mysqli_fetch_array($gender_result)) {
 
             $chartLabel[] = $rows['gender'];
             $chartData[] = $rows['gender_number'];
+
+            if ($rows['gender'] === 'Male') {
+              $barColors[] = "#009FCA";
+            } else if ($rows['gender'] === 'Female') {
+              $barColors[] = "#F766AE";
+            } else {
+              $randomColor = '#'.dechex(mt_rand(0x000000, 0xFFFFFF));
+              $barColors[] = $randomColor;
+            }
           }
           $returnChatLabels = json_encode($chartLabel);
           $returnChatData = json_encode($chartData);
-          ?>
+          $returnBarColors = json_encode($barColors);
 
-          var barColors = [
-            "#EA640C",
-            "#7F60FA",
-            "#2CCAAA",
-            "#e8c3b9"
-          ];
+          ?>
 
           <?php if (empty($chartLabel) && empty($chartData)) { ?>
             var chartLabel = ["No Data"];
@@ -284,22 +289,22 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
             });
           <?php   } else { ?>
 
-          new Chart("piechart_gender", {
-            type: "pie",
-            data: {
-              labels: <?php echo $returnChatLabels ?>,
-              datasets: [{
-                backgroundColor: barColors,
-                data: <?php echo $returnChatData ?>
-              }]
-            },
-            options: {
-              title: {
-                display: true,
-                text: "Percentage of User Gender"
+            new Chart("piechart_gender", {
+              type: "pie",
+              data: {
+                labels: <?php echo $returnChatLabels ?>,
+                datasets: [{
+                  backgroundColor: <?php echo $returnBarColors ?>,
+                  data: <?php echo $returnChatData ?>
+                }]
+              },
+              options: {
+                title: {
+                  display: true,
+                  text: "Percentage of User Gender"
+                }
               }
-            }
-          });
+            });
           <?php   } ?>
         </script>
 
@@ -307,21 +312,24 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
           <?php
           $chartLabel = [];
           $chartData = [];
-
+          $barColors = [];
           while ($rows = mysqli_fetch_array($institution_result)) {
 
             $chartLabel[] = $rows['status'];
             $chartData[] = $rows['stat'];
+
+            if ($rows['status'] === 'Active') {
+              $barColors[] = "#76EF00";
+            } else if ($rows['status'] === 'Inactive') {
+              $barColors[] = "#E60000";
+            } else {
+              $barColors[] = "#F2F2F2";
+            }
           }
           $returnChatLabels = json_encode($chartLabel);
           $returnChatData = json_encode($chartData);
+          $returnBarColors = json_encode($barColors);
           ?>
-
-          var barColors = [
-            "#76EF00",
-            "#e8c3b9",
-            "#E60000",
-          ];
 
           <?php if (empty($chartLabel) && empty($chartData)) { ?>
             var chartLabel = ["No Data"];
@@ -349,7 +357,7 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
               data: {
                 labels: <?php echo $returnChatLabels ?>,
                 datasets: [{
-                  backgroundColor: barColors,
+                  backgroundColor: <?php echo $returnBarColors ?>,
                   data: <?php echo $returnChatData ?>
                 }]
               },
@@ -367,23 +375,20 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
           <?php
           $chartLabel = [];
           $chartData = [];
-
+          $barColors = [];
           while ($rows = mysqli_fetch_array($pass_result)) {
-
             $chartLabel[] = $rows['verdict'];
             $chartData[] = $rows['pass_rate'];
+            if ($rows['verdict'] === 'Passed') {
+              $barColors[] = "#76EF00";
+            } else if ($rows['verdict'] === 'Failed') {
+              $barColors[] = "#E60000";
+            }
           }
           $returnChatLabels = json_encode($chartLabel);
           $returnChatData = json_encode($chartData);
+          $returnBarColors = json_encode($barColors);
           ?>
-
-          var barColors = [
-            "#E60000",
-            "#76EF00",
-            "#2b5797",
-            "#e8c3b9",
-            getRandomColor()
-          ];
           <?php
           if (empty($chartLabel) && empty($chartData)) { ?>
             var chartLabel = ["No Data"];
@@ -410,7 +415,7 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
               data: {
                 labels: <?php echo $returnChatLabels ?>,
                 datasets: [{
-                  backgroundColor: barColors,
+                  backgroundColor: <?php echo $returnBarColors ?>,
                   data: <?php echo $returnChatData ?>
                 }]
               },
@@ -428,23 +433,20 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
           <?php
           $chartLabel = [];
           $chartData = [];
-
+          $barColors = [];
           while ($rows = mysqli_fetch_array($postpass_result)) {
-
             $chartLabel[] = $rows['verdict'];
             $chartData[] = $rows['pass_rate'];
+            if ($rows['verdict'] === 'Passed') {
+              $barColors[] = "#76EF00";
+            } else if ($rows['verdict'] === 'Failed') {
+              $barColors[] = "#E60000";
+            }
           }
           $returnChatLabels = json_encode($chartLabel);
           $returnChatData = json_encode($chartData);
+          $returnBarColors = json_encode($barColors);
           ?>
-
-          var barColors = [
-            "#E60000",
-            "#76EF00",
-            "#2b5797",
-            "#e8c3b9",
-            getRandomColor()
-          ];
           <?php if (empty($chartLabel) && empty($chartData)) { ?>
             var chartLabel = ["No Data"];
             var chartData = [0];
@@ -470,7 +472,7 @@ $institution_result = mysqli_query($mysqli, $institution_no); ?>
               data: {
                 labels: <?php echo $returnChatLabels ?>,
                 datasets: [{
-                  backgroundColor: barColors,
+                  backgroundColor: <?php echo $returnBarColors ?>,
                   data: <?php echo $returnChatData ?>
                 }]
               },

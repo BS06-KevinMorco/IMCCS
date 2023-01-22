@@ -43,7 +43,7 @@
                                 <tbody>
 
                                     <?php
-                                    $sql = "SELECT *
+                                    $sql = "SELECT DISTINCT user.*, prfl.*, answer.*, assessment.*, score.*
                                     FROM user_tbl user
                                     INNER JOIN student_faculty_profile_tbl prfl
                                     ON user.user_id=prfl.user_id
@@ -52,11 +52,10 @@
                                     INNER JOIN assessment_tbl assessment
                                     ON answer.assessment_id = assessment.assessment_id
                                     INNER JOIN assessment_score score
-                                    ON assessment.assessment_id = score.assessment_id
-                                    INNER JOIN answer_tbl
-                                    ON answer.assessment_id = answer_tbl.assessment_id
+                                    ON answer.assessment_id = score.assessment_id
+                                    AND user.user_id = score.user_id
                                     WHERE score.verdict = 'Passed'
-                                    GROUP BY score.assessment_id";
+                                    GROUP BY assessment_score_id";
                                     $test2 = mysqli_query($mysqli, $sql);
 
                                     while ($row2 = mysqli_fetch_assoc($test2)) { ?>
@@ -80,7 +79,7 @@
                                         $resultOver = mysqli_query($mysqli, $selOver);
                                         $rowCountOver = mysqli_fetch_assoc($resultOver); ?>
                                         <tr>
-                                            <td><?php echo $row2['username']; ?></td>
+                                            <td><?php echo $row2['fname']; ?></td>
 
                                             <td><?php echo $row3['title']; ?></td>
 
@@ -128,7 +127,7 @@
                                 <tbody>
 
                                     <?php
-                                    $sqlFail = "SELECT *
+                                    $sqlFail = "SELECT DISTINCT user.*, prfl.*, answer.*, assessment.*, score.*
                                     FROM user_tbl user
                                     INNER JOIN student_faculty_profile_tbl prfl
                                     ON user.user_id=prfl.user_id
@@ -137,11 +136,10 @@
                                     INNER JOIN assessment_tbl assessment
                                     ON answer.assessment_id = assessment.assessment_id
                                     INNER JOIN assessment_score score
-                                    ON assessment.assessment_id = score.assessment_id
-                                    INNER JOIN answer_tbl
-                                    ON answer.assessment_id = answer_tbl.assessment_id
+                                    ON answer.assessment_id = score.assessment_id
+                                    AND user.user_id = score.user_id
                                     WHERE score.verdict = 'Failed'
-                                    GROUP BY score.assessment_id";
+                                    GROUP BY assessment_score_id";
                                     $countSqlFail = mysqli_query($mysqli, $sqlFail);
 
                                     while ($returnSqlFail = mysqli_fetch_assoc($countSqlFail)) { ?>
@@ -161,7 +159,7 @@
                                         $resultOvers = mysqli_query($mysqli, $selOvers);
                                         $rowCountOvers = mysqli_fetch_assoc($resultOvers); ?>
                                         <tr>
-                                            <td><?php echo $returnSqlFail['username']; ?></td>
+                                            <td><?php echo $returnSqlFail['fname']; ?></td>
 
                                             <td><?php echo $returnSqlFail['title']; ?></td>
 
@@ -244,7 +242,7 @@
                                         $resultOver = mysqli_query($mysqli, $selOver);
                                         $rowCountOver = mysqli_fetch_assoc($resultOver); ?>
                                         <tr>
-                                            <td><?php echo $row2['username']; ?></td>
+                                            <td><?php echo $row2['fname']; ?></td>
 
                                             <td><?php echo $row2['title']; ?></td>
 
@@ -326,7 +324,7 @@
                                         $resultOver = mysqli_query($mysqli, $selOver);
                                         $rowCountOver = mysqli_fetch_assoc($resultOver); ?>
                                         <tr>
-                                            <td><?php echo $row2['username']; ?></td>
+                                            <td><?php echo $row2['fname']; ?></td>
 
                                             <td><?php echo $row2['title']; ?></td>
 

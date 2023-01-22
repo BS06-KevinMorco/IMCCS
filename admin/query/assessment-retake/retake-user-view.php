@@ -40,7 +40,7 @@ if (empty($checkRowExist)) {
 ?>
 
 <?php
-$countSummaryAssessments = "SELECT * FROM retake_score_tbl as retake_score INNER JOIN retake_chosen_tbl as chosen ON retake_score.code = chosen.code INNER JOIN assessment_tbl as assessment ON assessment.assessment_id = retake_score.assessment_id  INNER JOIN assessment_score as score ON score.assessment_id = retake_score.assessment_id WHERE chosen.user_id = ? and chosen.assessment_id = ? GROUP BY chosen.code ORDER BY chosen.user_id";
+$countSummaryAssessments = "SELECT * FROM retake_score_tbl as retake_score INNER JOIN retake_chosen_tbl as chosen ON retake_score.code = chosen.code INNER JOIN assessment_tbl as assessment ON assessment.assessment_id = retake_score.assessment_id  INNER JOIN assessment_score as score ON score.assessment_id = retake_score.assessment_id AND score.user_id = chosen.user_id WHERE chosen.user_id = ? and chosen.assessment_id = ? GROUP BY chosen.code ORDER BY chosen.user_id";
 $stmt = $mysqli->prepare($countSummaryAssessments);
 $stmt->bind_param("is", $user_id, $selectedValue);
 $stmt->execute();

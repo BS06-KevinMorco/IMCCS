@@ -1,7 +1,7 @@
 <?php
 $assessment_id =  mysqli_real_escape_string($mysqli, $_GET['assessment_id']);
 
-$selRetakes = $mysqli->prepare("SELECT * FROM retake_score_tbl as retake_score  INNER JOIN retake_chosen_tbl as chosen ON retake_score.code = chosen.code INNER JOIN assessment_tbl as assessment ON assessment.assessment_id = chosen.assessment_id INNER JOIN assessment_score as score ON score.assessment_id = chosen.assessment_id WHERE chosen.user_id = ? AND assessment.assessment_id = ? GROUP BY chosen.code ORDER BY chosen.user_id");
+$selRetakes = $mysqli->prepare("SELECT * FROM retake_score_tbl as retake_score  INNER JOIN retake_chosen_tbl as chosen ON retake_score.code = chosen.code INNER JOIN assessment_tbl as assessment ON assessment.assessment_id = chosen.assessment_id INNER JOIN assessment_score as score ON score.assessment_id = chosen.assessment_id AND score.user_id = chosen.user_id WHERE chosen.user_id = ? AND assessment.assessment_id = ? GROUP BY chosen.code ORDER BY chosen.user_id");
 $selRetakes->bind_param('ii', $_SESSION['user_id'], $assessment_id);
 $selRetakes->execute();
 $selRetakeRows = $selRetakes->get_result();

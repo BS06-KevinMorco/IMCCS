@@ -50,6 +50,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['user_id'] = $row['user_id'];
                 $_SESSION['username'] = $row['username'];
+                $_SESSION['fname'] = $row['fname'];
                 $_SESSION['usertype'] = $row['usertype'];
                 header("location:admin/home-admin.php?page=admin-dashboard");
             }else{

@@ -55,8 +55,8 @@ $returnSummaryAssessmentRow = $countSummaryAssessment->get_result();
 //$countSummaryAssessmentRow = $countSummaryAssessment->get_result();
 
 
-$assessmentTakerQuery = $mysqli->prepare("SELECT * from retake_score_tbl WHERE assessment_id= ?");
-$assessmentTakerQuery->bind_param('s', $assessment_id);
+$assessmentTakerQuery = $mysqli->prepare("SELECT * from retake_score_tbl WHERE assessment_id= ? AND institution_id = ?");
+$assessmentTakerQuery->bind_param('ss', $assessment_id,$selectedValue);
 $assessmentTakerQuery->execute();
 $assessmentTakerQuery->store_result();
 $returnAssessmentTaker = $assessmentTakerQuery->num_rows;
@@ -78,16 +78,16 @@ $returnQuestionItem = $questionItemQuery->num_rows;
 //END
 
 //COUNTS THE TOTAL OF SUM OF SCORES OF THE ASSESSMENT TAKERS
-$overallScoreQuery = $mysqli->prepare("SELECT SUM(retake_score) as total_score FROM retake_score_tbl WHERE assessment_id = ?");
-$overallScoreQuery->bind_param('s', $assessment_id);
+$overallScoreQuery = $mysqli->prepare("SELECT SUM(retake_score) as total_score FROM retake_score_tbl WHERE assessment_id = ? AND institution_id = ?");
+$overallScoreQuery->bind_param('ss', $assessment_id, $selectedValue);
 $overallScoreQuery->execute();
 $resultScore = $overallScoreQuery->get_result();
 $returnOverallScore = $resultScore->fetch_assoc();
 //END
 
 //COUNTS THE TOTAL NUMBER OF QUESTIONS PER ASSESSMENT TAKEN BY ALL ASSESSMENT TAKERS
-$overallQuestionQuery = $mysqli->prepare("SELECT SUM(point) as point  FROM retake_answer_tbl WHERE assessment_id = ?");
-$overallQuestionQuery->bind_param('s', $assessment_id);
+$overallQuestionQuery = $mysqli->prepare("SELECT SUM(point) as point  FROM retake_answer_tbl WHERE assessment_id = ? AND institution_id = ?");
+$overallQuestionQuery->bind_param('ss', $assessment_id,$selectedValue);
 $overallQuestionQuery->execute();
 $resultOverallQuestion = $overallQuestionQuery->get_result();
 $returnOverallQuestion = $resultOverallQuestion->fetch_assoc();
@@ -339,7 +339,9 @@ if ($returnSummaryAssessmentRow->num_rows != 0) { ?>
                 $resultQuestions = $mysqli->query($queryQuestions);
 
                 // Initialize the chart colors array
-                $chartColors = ["#990099", "#109618", "#FF9900", "#DC3912"];
+               // $chartColors = ["#990099", "#109618", "#FF9900", "#DC3912"];
+               $randomColor = '#'.dechex(mt_rand(0x000000, 0xFFFFFF));
+               $chartColors[] = $randomColor;
 
                 // Loop through the questions
                 while ($question = $resultQuestions->fetch_assoc()) {
@@ -444,7 +446,7 @@ if ($returnSummaryAssessmentRow->num_rows != 0) { ?>
   #443E3E ${progressValue * 3.6}deg
 )`;
             } else {
-                <?php if ($institutionAssessmentRate >= 75) { ?>
+                <?php if ($institutionAssessmentRate >= $returnStatus['passing_rate']) { ?>
                     progressValue++;
                     valueContainer.textContent = `${progressValue}%`;
                     progressBar.style.background = `conic-gradient(
