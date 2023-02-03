@@ -92,6 +92,14 @@ $('#forgot-pass').submit(function (event) {
                         confirmButtonColor: '#800000',
                         confirmButtonText: 'OK'
                     })
+                } else if (trimData === "Undeliverable") {
+                    Swal.fire({
+                        title: 'Email does not exist!',
+                        text: "Please register your existing email account",
+                        icon: 'error',
+                        confirmButtonColor: '#800000',
+                        confirmButtonText: 'OK'
+                    })
                 } else {
                     Swal.fire({
                         title: 'Cannot proceed to your request!',
