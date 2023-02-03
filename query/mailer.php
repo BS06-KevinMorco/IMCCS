@@ -14,7 +14,7 @@ require '../mail/SMTP.php';
 $mail = new PHPMailer(true);
 
 
-$api_key = "b3d6763bb8d14e5e939140e944f1627e";
+$api_key = "e99a40036c2b4f10bb88b98ab1e79c6f";
 
 $ch = curl_init();
 
@@ -38,26 +38,9 @@ if ($data['deliverability'] === "UNDELIVERABLE") {
 if ($data["is_disposable_email"]["value"] === true) {
     echo "Disposable";
     exit;
-} else {
-    try {/*
-    //Server settings
-    $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = 'smtp.hostinger.com';                    // Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'imccs-onlinesupport@imccs.online';
-    $mail->Password   = 'Kevinisback12345*';                            // SMTP password
-    $mail->SMTPSecure = 'tls';
-    $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
-    );
-    $mail->setFrom('imccs-onlinesupport@imccs.online', 'IMCCS');
-    $mail->addAddress($email);
-    */
+}
+if ($data['deliverability'] === "DELIVERABLE") {
+    try {
 
         $mail->isSMTP();
         $mail->Host       = 'smtp.hostinger.com';                    // Set the SMTP server to send through
@@ -66,14 +49,16 @@ if ($data["is_disposable_email"]["value"] === true) {
         $mail->Password   = 'Kevinisback12345*';                            // SMTP password
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
-        /* Used in development
+
+
+        /*
+        $mail->isSMTP();
         $mail->Host = 'sandbox.smtp.mailtrap.io';
         $mail->SMTPAuth = true;
         $mail->Port = 2525;
-        $mail->Username = 'dbd4203b5c43d8';
-        $mail->Password = 'a5cdfcda4a75fc';
-        */
-
+        $mail->Username = '9ccf23b8516359';
+        $mail->Password = '20cdbb486b9762';
+*/
         //Set email properties
         $mail->setFrom('imccs-onlinesupport@imccs.online', 'IMCCS');
         $mail->addAddress($email, 'You');
@@ -166,6 +151,8 @@ if ($data["is_disposable_email"]["value"] === true) {
         $conn->close();
     } catch (Exception $e) {
         // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-         echo "Mailer Error";
+        echo "Mailer Error";
     }
+} else {
+    echo "Api Error";
 }

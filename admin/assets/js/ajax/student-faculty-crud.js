@@ -35,12 +35,12 @@ function validatePhoneNumber(inputElement) {
 
 function validInteger(inputElement) {
 
-     // get value of input email
-     var number = inputElement.val().trim();
+    // get value of input email
+    var number = inputElement.val().trim();
 
-     // use regular expression
-     var reg = /^\d+$/;
-     return reg.test(number);
+    // use regular expression
+    var reg = /^\d+$/;
+    return reg.test(number);
 }
 
 function validatePassword() {
@@ -422,7 +422,6 @@ $(document).ready(function () {
 
                     success: function (data) {
 
-
                         if (data == 'Existing Code') {
                             Toast.fire({
                                 icon: 'success',
@@ -475,7 +474,20 @@ $(document).ready(function () {
                                 allowOutsideClick: false,
 
                             })
-                        } else {
+                        }
+                        else if (data == 'Undeliverable') {
+                            Swal.fire({
+                                title: 'Registration Failed!',
+                                text: "The email does not exist",
+                                icon: 'error',
+                                showCancelButton: true,
+                                confirmButtonColor: '#800000',
+                                confirmButtonText: 'OK',
+                                reverseButtons: true,
+                                allowOutsideClick: false,
+                            })
+                        }
+                        else {
                             Swal.fire({
                                 title: 'Registration Failed!',
                                 text: "Your institution doesn't exist on our database, try again next time",
@@ -490,9 +502,10 @@ $(document).ready(function () {
                         }
                     },
                     error: function (xhr, status, error) {
+                        console.log(error)
                         Swal.fire({
                             title: 'Registration Saved',
-                            text: "Email Server is down, you can check again later!",
+                            text: "Email/Api Server is down, you can check again later!",
                             icon: 'warning',
                             confirmButtonColor: '#800000',
                             confirmButtonText: 'OK'
@@ -866,6 +879,17 @@ $(document).ready(function () {
                                 allowOutsideClick: false,
 
                             })
+                        } else if (data == 'Undeliverable') {
+                            Swal.fire({
+                                title: 'Registration Failed!',
+                                text: "The email does not exist",
+                                icon: 'error',
+                                showCancelButton: true,
+                                confirmButtonColor: '#800000',
+                                confirmButtonText: 'OK',
+                                reverseButtons: true,
+                                allowOutsideClick: false,
+                            })
                         } else {
                             Swal.fire({
                                 title: 'Registration Failed!',
@@ -884,7 +908,7 @@ $(document).ready(function () {
                         //console.error(xhr);
                         Swal.fire({
                             title: 'Registration Saved',
-                            text: "Email Server is down, you can check again later!",
+                            text: "Email/Api Server is down, you can check again later!",
                             icon: 'warning',
                             confirmButtonColor: '#800000',
                             confirmButtonText: 'OK'
@@ -1330,7 +1354,7 @@ $(document).ready(function () {
                         usertype: type,
                         fname: firstname,
                         lname: lastname,
-                        gender:gender,
+                        gender: gender,
                         institution: institution,
                         grade_level: grade_level,
                         email: email,
@@ -1354,8 +1378,6 @@ $(document).ready(function () {
                     },
 
                     success: function (data) {
-
-
                         if (data == 'Existing Code') {
 
                             Toast.fire({
@@ -1409,6 +1431,17 @@ $(document).ready(function () {
                                 allowOutsideClick: false,
 
                             })
+                        } else if (data == 'Undeliverable') {
+                            Swal.fire({
+                                title: 'Registration Failed!',
+                                text: "The email does not exist",
+                                icon: 'error',
+                                showCancelButton: true,
+                                confirmButtonColor: '#800000',
+                                confirmButtonText: 'OK',
+                                reverseButtons: true,
+                                allowOutsideClick: false,
+                            })
                         } else {
                             Swal.fire({
                                 title: 'Registration Failed!',
@@ -1425,9 +1458,12 @@ $(document).ready(function () {
                     },
                     error: function (xhr, status, error) {
                         //console.error(xhr);
+                        console.log(error)
+                        console.log(xhr)
+
                         Swal.fire({
                             title: 'Registration Saved',
-                            text: "Email Server is down, you can check again later!",
+                            text: "Email/Api Server is down, you can check again later!",
                             icon: 'warning',
                             confirmButtonColor: '#800000',
                             confirmButtonText: 'OK'

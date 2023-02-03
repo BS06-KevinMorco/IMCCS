@@ -30,39 +30,41 @@ $checkUsername->bind_param('s', $username);
 $checkUsername->execute();
 $checkUsername->store_result();
 $returnCheckUsername = $checkUsername->num_rows;
-/*
-    $checkInstitution = mysqli_query($mysqli, "SELECT name from institution_tbl WHERE name='$institution'");
 
-    $checkUsername = mysqli_query($mysqli, "SELECT username from student_faculty_profile_tbl WHERE username='$username'");
-    // Insert some values
-    $insert1 = mysqli_query($mysqli, "INSERT INTO user_tbl (email,password, usertype, created_at)
-       VALUES ('$email','$hash','$usertype','$timestamp')");
-    $insert2 = mysqli_query($mysqli, "INSERT INTO student_faculty_profile_tbl (user_id, fname, lname, institution, grade_level, username, contact_no, created_at)
-       VALUES (LAST_INSERT_ID(),'$fname','$lname','$institution', '$grade_level', '$username', '$contact' ,'$timestamp')");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
+require '../../../mail/Exception.php';
+require '../../../mail/PHPMailer.php';
+require '../../../mail/SMTP.php';
 
+// Instantiation and passing `true` enables exceptions
+$mail = new PHPMailer(true);
+$api_key = "e99a40036c2b4f10bb88b98ab1e79c6f";
 
+$ch = curl_init();
 
-    if (mysqli_num_rows($checkInstitution) == 1) {
-        if ($insert1 && $insert2) {
-            echo json_encode(array("Existing Code"));
-            mysqli_query($mysqli, "COMMIT");
-        }
-    } else if (strlen($username) < 5) {
-        echo json_encode(array("Username Length is Invalid"));
-        mysqli_query($mysqli, "ROLLBACK");
-    } else if (strlen($contact) != 11) {
-        echo json_encode(array("Contact Number Length is Invalid"));
-        mysqli_query($mysqli, "ROLLBACK");
-    } else if (mysqli_num_rows($checkUsername) == 1) {
-        echo json_encode(array("Username Exists Already"));
-        mysqli_query($mysqli, "ROLLBACK");
-    } else {
-        echo json_encode(array("No Existing Code"));
-        mysqli_query($mysqli, "ROLLBACK");
-    }
-    */
+curl_setopt_array($ch, [
+    CURLOPT_URL => "https://emailvalidation.abstractapi.com/v1?api_key=$api_key&email=$email",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_FOLLOWLOCATION => true
+]);
 
+$response = curl_exec($ch);
+
+curl_close($ch);
+
+$data = json_decode($response, true);
+
+if ($data['deliverability'] === "UNDELIVERABLE") {
+    echo json_encode(array("Undeliverable"));
+    exit;
+}
+if ($data["is_disposable_email"]["value"] === true) {
+    echo json_encode(array("Disposable"));
+    exit;
+} else {
     $mysqli->autocommit(FALSE);
     if ($returnCheckInstitution == 1) {
 
@@ -93,43 +95,38 @@ $returnCheckUsername = $checkUsername->num_rows;
     }
 
     $mysqli->commit();
+    try {
+        //Server settings
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.hostinger.com';                    // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = 'imccs-onlinesupport@imccs.online';
+        $mail->Password   = 'Kevinisback12345*';                            // SMTP password
+        $mail->SMTPSecure = 'tls';
+        $mail->Port       = 587;
 
-require '../../../mail/Exception.php';
-require '../../../mail/PHPMailer.php';
-require '../../../mail/SMTP.php';
 
-// Instantiation and passing `true` enables exceptions
-$mail = new PHPMailer(true);
+        /*
 
-try {
-    //Server settings
-    $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = 'smtp.hostinger.com';                    // Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'imccs-support@imccs.online';
-    $mail->Password   = 'Kevinisback12345*';                            // SMTP password
-    $mail->SMTPSecure = 'tls';
-    $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
-    );
-    $mail->setFrom('imccs-support@imccs.online', 'IMCCS');
-    $mail->addAddress($email);
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = 'dbd4203b5c43d8';
+        $mail->Password = 'a5cdfcda4a75fc';
+*/
 
-    $token = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
+        $mail->setFrom('imccs-onlinesupport@imccs.online', 'IMCCS');
+        $mail->addAddress($email, 'You');
 
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'IMCCS Account Registration';
-    $mail->Body    = '<table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8">
+        $token = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
+
+        // Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'IMCCS Account Registration';
+        $mail->Body    = '
+    <html>
+    <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8">
     <tr>
         <td>
             <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
@@ -184,23 +181,25 @@ try {
             </table>
         </td>
     </tr>
-</table>';
+</table>
+</html>';
 
-$conn = new mySqli('localhost', 'u351518056_capstone', 'H7xpO*D>9d', 'u351518056_capstone');
-    if ($conn->connect_error) {
-        die('Could not connect to the database.');
+        $conn = new mySqli('localhost', 'u351518056_capstone', 'H7xpO*D>9d', 'u351518056_capstone');
+        if ($conn->connect_error) {
+            die('Could not connect to the database.');
+        }
+
+        $verifyQuery = $conn->query("SELECT * FROM user_tbl WHERE email = '$email'");
+
+        if ($verifyQuery->num_rows) {
+            $codeQuery = $conn->query("UPDATE user_tbl  set  token='$token' WHERE email = '$email'");
+
+            $mail->send();
+        }
+        $conn->close();
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-
-    $verifyQuery = $conn->query("SELECT * FROM user_tbl WHERE email = '$email'");
-
-    if ($verifyQuery->num_rows) {
-        $codeQuery = $conn->query("UPDATE user_tbl  set  token='$token' WHERE email = '$email'");
-
-        $mail->send();
-    }
-    $conn->close();
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 mysqli_close($mysqli);
 ?>
