@@ -184,6 +184,23 @@ p {
   background-color: var(--primary-color) !important;
 }
 
+.code-login {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  color: var(--white);
+  cursor: pointer;
+  z-index: 5;
+  -webkit-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+  background-color: var(--primary-button-color) !important;
+}
+
 .btn-custom-secondary {
   display: inline-block;
   text-align: center;
@@ -601,6 +618,7 @@ p {
 .hero {
   background: var(--primary-color);
   padding-top: 180px;
+  padding-bottom: 100px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

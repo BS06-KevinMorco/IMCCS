@@ -44,10 +44,8 @@ if (isset($_GET['topic'])) {
                     <h2><?php echo $row['title'] ?></h2>
                     <p class="topic-view-description mt-4"><?php echo $row['description'] ?></p>
                     <form id="insert-chosen" method="POST">
-                        <input type="hidden" name="" id="user-id" value="<?php echo $_SESSION['user_id'] ?>">
-                        <input type="hidden" name="" id="lesson-id" value="<?php echo $row['lesson_id'] ?>">
+
                         <input type="hidden" name="" id="title" value="<?php echo $row['title'] ?>">
-                        <input type="hidden" name="" id="status" value="inprogress">
 
                         <input type="submit" class="btn btn-custom-primary btn-chose-topic mt-4">
                     </form>

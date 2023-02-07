@@ -70,16 +70,16 @@
             </a>
         </li><!-- End Dashboard Nav -->
         <hr>
-
+<!--
         <li class="nav-heading">System Users</li>
 
         <li class="nav-item">
             <a class="nav-link" href="home-admin.php?page=manage-users">
                 <i class="fa-solid fa-users"></i> <span>Manage Users</span>
             </a>
-        </li><!-- End Dashboard Nav -->
+        </li>
         <hr>
-
+        -->
         <li class="nav-heading">Educational Institution</li>
 
         <li class="nav-item">
@@ -111,7 +111,7 @@
         </li><!-- End Course Nav -->
         <hr>
 
-
+<!--
         <li class="nav-heading">Assessment Result Section</li>
 
         <li class="nav-item">
@@ -119,9 +119,9 @@
             <i class="fa-solid fa-square-poll-vertical"></i>
                 <span>Manage Result</span>
             </a>
-        </li><!-- End Course Nav -->
+        </li>
         <hr>
-
+        -->
 
         <li class="nav-heading">Pages</li>
         <li class="nav-item">

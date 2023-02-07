@@ -84,20 +84,14 @@ $returnTopicQuery = $topicQuery->num_rows;
                         <div class="column column-one d-flex">
                             <div class="mySidebar pt-4" id="mySidebar">
                                 <ul class="topic-progress" id="topic-progress">
-                                    <input type="hidden" id="topic-user-id" value="<?php echo $_SESSION['user_id'] ?>">
-                                    <input type="hidden" id="topic-user-email" value="<?php echo $_SESSION['email'] ?>">
-
                                     <?php foreach ($rows as $row) {
                                         $itemss =  $row['title'];
                                     ?>
-                                        <a class="topic-progress-item" data-id="<?php echo $row['subtopic_id'] ?>" data-module="<?php echo $row['module'] ?>" target="1" id="choice-<?php echo $row['subtopic_id'] ?>"><strong><?php echo $row['module']; ?></strong>
+                                        <a class="topic-progress-item inprogress" data-id="<?php echo $row['subtopic_id'] ?>" data-module="<?php echo $row['module'] ?>" target="1" id="choice-<?php echo $row['subtopic_id'] ?>"><strong><?php echo $row['module']; ?></strong>
 
                                         </a>
                                         <br>
                                     <?php  } ?>
-                                    <div class="topic-finish-container" data-title="<?php echo $itemss ?>">
-                                        <button class="btn btn-toggle btnFinishTopic animated pulse mt-4" data-title="<?php echo $itemss ?>">Complete Topic</button>
-                                    </div>
                                 </ul>
                             </div>
                             <div class="toggle-topic-progress" id="toggle" onclick="toggleSidebar()">
@@ -305,7 +299,6 @@ $returnTopicQuery = $topicQuery->num_rows;
 
 <script>
     $('.topic-progress a:first').each(function() { //hover  can be used
-        $(this).removeClass('lock-topic').toggleClass('inprogress')
 
         var title = $(this).data('module')
 
@@ -432,31 +425,6 @@ $returnTopicQuery = $topicQuery->num_rows;
                             });
                         });
                     <?php } ?>
-                    <?php /*
-                    <?php
-                    $items = array();
-                    foreach ($rowss as $rows) {
-                        $items[] =  $rows['module_title'];
-                    }
-                    ?>
-                    var arrayFromPHP = <?php echo json_encode($items) ?>;
-
-                    $.each(arrayFromPHP, function(i, elem) {
-
-                        $(".topic-btn-container").each(function(index) {
-                            if ($(this).data('module') === elem) {
-                                $(this).find('.btnFinish').css('color', 'white')
-                                $(this).find('.btnFinish').css('background', 'green')
-
-                                $(this).find('.btnFinish').html('<i class="fa-solid fa-circle-check"></i> Module Finished')
-                                $(this).find('.btnFinish').prop("disabled", true);
-
-                            }
-
-                        });
-                    });
-
-*/ ?>
                 })
 
                 $('.subtopic-content-view').html(data)
@@ -626,130 +594,7 @@ $returnTopicQuery = $topicQuery->num_rows;
     })
 </script>
 
-<script>
-    $("#topic-progress").find(".topic-progress-item").nextAll("a").not(".is-done").addClass('lock-topic')
 
-
-    $(document).ready(function() {
-        $('.topic-progress-item').each(function() { //hover  can be used
-
-            if ($(this).hasClass('is-done')) {
-                $('.btnFinishTopic').show();
-                console.log('show')
-
-
-            } else {
-                $('.btnFinishTopic').hide();
-                console.log('hidden')
-
-            }
-        });
-    })
-
-
-    $(document).on('click', '.btnFinishTopic', function() {
-        var user_id = $('#topic-user-id').val()
-        var email = $('#topic-user-email').val()
-        var topic_title = $(this).data('title')
-        console.log(topic_title)
-        Swal.fire({
-            title: 'Are you sure you want to complete the ' + topic_title + ' topic?',
-            text: "This action can't be undone",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#800000',
-            showCancelButton: true,
-            reverseButtons: true,
-            closeOnCancel: true,
-            confirmButtonText: 'Yes, I am sure',
-            cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    type: "POST",
-                    url: 'query/topic-page/complete-topic.php',
-                    data: {
-                        id: user_id,
-                        title: topic_title,
-                        email: email
-                    },
-                    success: function() {
-
-                        window.location.reload();
-
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr);
-                        console.error(status);
-                        console.error(error);
-                    }
-                });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                swal.close()
-            }
-        })
-    });
-    <?php /*  $(document).ready(function() {
-
-        <?php
-        $items = array();
-        foreach ($returnChosenArray as $rowsss) {
-            $items[] =  $rowsss['title'];
-        }
-        ?>
-        var arrayFromPHP = <?php echo json_encode($items) ?>;
-
-        console.log(arrayFromPHP)
-        $.each(arrayFromPHP, function(i, elem) {
-
-        $(".topic-finish-container").each(function(index) {
-            if ($(this).data('title') === elem) {
-                $(this).find('.btnFinishTopic').css('color', 'white')
-                $(this).find('.btnFinishTopic').css('background', 'green')
-
-                $(this).find('.btnFinishTopic').html('<i class="fa-solid fa-circle-check"></i> Topic Finished')
-                $(this).find('.btnFinishTopic').prop("disabled", true);
-
-            }
-
-        });
-    })
-    }) */ ?>
-
-    $(document).ready(function() {
-        <?php
-        $items = array();
-        if ($countChosenResults == 0) {
-            $returnChosenArrays[] = ['N/A'];
-        } else {
-            foreach ($returnChosenArrays as $rows) {
-                $items[] =  $rows['title'];
-            }
-        }
-
-        ?>
-        var arrayFromPHP = <?php echo json_encode($items) ?>;
-
-        console.log(arrayFromPHP)
-        $.each(arrayFromPHP, function(i, elem) {
-
-            $(".topic-finish-container").each(function(index) {
-
-                if ($(this).data('title') === elem) {
-                    $(this).find('.btnFinishTopic').css('color', 'white')
-                    $(this).find('.btnFinishTopic').css('background', 'green')
-
-                    $(this).find('.btnFinishTopic').html('<i class="fa-solid fa-circle-check"></i> Topic Finished')
-                    $(this).find('.btnFinishTopic').prop("disabled", true);
-                    $("#overlay").show();
-
-
-                }
-
-            });
-        })
-    })
-</script>
 
 <script>
     $(document).on('click', '.flip', function() {

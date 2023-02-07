@@ -2101,67 +2101,7 @@ $('#insert-chosen').submit(function () {
 
 
 
-    Swal.fire({
-        title: 'Do you want to choose this topic?',
-        text: "Press CONFIRM to proceed!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'CONFIRM',
-        reverseButtons: true,
-        allowOutsideClick: false,
-        customClass: {
-            confirmButton: 'edit-primary-button'
-        },
-
-    }).then((result) => {
-        if (result.value) {
-            $.ajax({
-                type: "POST",
-                url: "query/topic-page/user-save-topic.php",
-                data: {
-                    user_id: user_id,
-                    lesson_id: lesson_id,
-                    title: title,
-                    status: status
-
-                },
-                dataType: 'json',
-
-                success: function (data) {
-
-                    if (data == 'You have already taken this topic') {
-                        Swal.fire({
-                            title: 'You have already chosen this topic',
-                            text: "Continue your progress on this topic?",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            reverseButtons: true,
-                            closeOnCancel: true,
-                            confirmButtonColor: '#800000',
-                            confirmButtonText: 'Yes, Continue',
-
-
-                        }).then((result) => {
-                            if (result.value) {
-                                window.location = 'home-student.php?page=user-progress-topic&title=' + title;
-
-                            } else {
-                                // something other stuff
-                            }
-
-                        })
-                    } else {
-                        window.location = 'home-student.php?page=user-progress-topic&title=' + title;
-
-                    }
-                },
-                error: function (xhr, status, error) {
-
-
-                }
-            });
-        }
-    });
+    window.location = 'home-student.php?page=user-progress-topic&title=' + title;
 
 });
 
